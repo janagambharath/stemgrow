@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.vite/
+tmp-product-contact-sheet.jpg
+*.log
+.DS_Store

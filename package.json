@@ -1,0 +1,11 @@
+{
+  "name": "stemgrow-agri-solutions",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/static-server.mjs",
+    "build": "node scripts/verify-static.mjs",
+    "preview": "node scripts/static-server.mjs"
+  }
+}
