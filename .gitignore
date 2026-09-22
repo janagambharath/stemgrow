@@ -2,5 +2,7 @@ node_modules/
 dist/
 .vite/
 tmp-product-contact-sheet.jpg
+tmp-chrome*/
+tmp-mobile-*.png
 *.log
 .DS_Store
