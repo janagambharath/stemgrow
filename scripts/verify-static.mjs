@@ -9,7 +9,7 @@ for (const file of [...required, ...productImages.map((image) => `products/suppl
   if (!existsSync(full) || statSync(full).size === 0) throw new Error(`Missing required asset: ${file}`);
 }
 const stylesheet = readFileSync(resolve(root, "src/styles.css"), "utf8");
-for (const token of ["heroLineSlide", "10398726", "20234940", "20344345", "39002374", "12470180"]) {
+for (const token of ["heroLineSlide", "10398726", "20234940", "20344345", "10614246", "12470180"]) {
   if (!stylesheet.includes(token)) throw new Error(`Missing verified hero or crop visual treatment: ${token}`);
 }
 console.log("Static site verification passed: core files, crop slideshow treatments, and 7 supplied product package images are present.");
