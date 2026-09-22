@@ -3,12 +3,14 @@ const b = (en, te) => ({ en, te });
 let locale = "en";
 let filter = "all";
 let selectedProduct = null;
+let prefillProduct = "";
+let formState = "idle";
 
 const pick = (value) => typeof value === "string" ? value : value[locale];
 const esc = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
 
 const ui = {
-  navHome: b("Home", "హోమ్"), navAbout: b("About Us", "మా గురించి"), navProducts: b("Products", "ఉత్పత్తులు"), navApproach: b("Our Approach", "మా విధానం"), navTestimonials: b("Testimonials", "రైతుల అభిప్రాయాలు"), navContact: b("Contact", "సంప్రదించండి"),
+  navHome: b("Home", "హోమ్"), navAbout: b("About Us", "మా గురించి"), navSolutions: b("Solutions", "పరిష్కారాలు"), navProducts: b("Products", "ఉత్పత్తులు"), navApproach: b("Our Approach", "మా విధానం"), navTestimonials: b("Testimonials", "రైతుల అభిప్రాయాలు"), navContact: b("Contact", "సంప్రదించండి"),
   contact: b("Contact Us", "సంప్రదించండి"), heroLabel: b("STEMGROW AGRI SOLUTIONS", "స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్"), heroLead: b("Growing Better.", "మెరుగైన పెరుగుదల."), heroTail: b("Farming Smarter.", "తెలివైన వ్యవసాయం."),
   heroCopy: b("STEMGROW AGRI SOLUTIONS PRIVATE LIMITED provides practical agricultural solutions across crop nutrition, plant growth support and biological crop protection.", "స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్ ప్రైవేట్ లిమిటెడ్ పంట పోషణ, మొక్కల పెరుగుదల మరియు జీవ ఆధారిత పంట రక్షణకు ఆచరణాత్మక వ్యవసాయ పరిష్కారాలను అందిస్తుంది."),
   explore: b("Explore Products", "ఉత్పత్తులు చూడండి"), talk: b("Talk to Us", "మాతో మాట్లాడండి"), viewSolutions: b("View Our Solutions", "మా పరిష్కారాలు చూడండి"), productCount: b("Focused Product Solutions", "ఎంపిక చేసిన ఉత్పత్తి పరిష్కారాలు"), nutrition: b("Crop Nutrition", "పంట పోషణ"), growth: b("Plant Growth", "మొక్కల పెరుగుదల"), biological: b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ"),
@@ -20,14 +22,14 @@ const ui = {
   catalogEyebrow: b("FOCUSED PORTFOLIO", "ఎంపిక చేసిన ఉత్పత్తుల శ్రేణి"), catalogTitle: b("Our Products", "మా ఉత్పత్తులు"), catalogCopy: b("Agricultural solutions developed for different crop requirements.", "వివిధ పంట అవసరాల కోసం రూపొందించిన వ్యవసాయ పరిష్కారాలు."),
   farmerEyebrow: b("FARMER-FIRST THINKING", "రైతు-మొదటి ఆలోచన"), farmerTitle: b("Built Around Real Crop Needs", "రైతుల పంట అవసరాలను దృష్టిలో పెట్టుకుని రూపొందించిన పరిష్కారాలు"), farmerCopy: b("A practical way to navigate the crop stages and needs that shape our portfolio.", "మా ఉత్పత్తుల శ్రేణిని రూపొందించే పంట దశలు, అవసరాలను అర్థం చేసుకోవడానికి ఆచరణాత్మక మార్గం."),
   whyEyebrow: b("DESIGNED FOR THE FIELD", "పొలం కోసం రూపొందించబడింది"), whyTitle: b("Why Stemgrow?", "ఎందుకు స్టెమ్‌గ్రో?"), whyCopy: b("A clear, practical approach to crop nutrition, growth and protection.", "పంట పోషణ, పెరుగుదల, రక్షణకు స్పష్టమైన, ఆచరణాత్మక విధానం."),
-  testimonialEyebrow: b("STEMGROW COMMUNITY", "స్టెమ్‌గ్రో సమాజం"), testimonialTitle: b("What Farmers Say", "రైతుల అభిప్రాయాలు"), testimonialCopy: b("Farmer experiences and testimonials will be added here.", "రైతుల అనుభవాలు మరియు అభిప్రాయాలు ఇక్కడ జోడించబడతాయి."), testimonialSmall: b("A dedicated space for verified farmer feedback.", "ధృవీకరించిన రైతుల అభిప్రాయాల కోసం ప్రత్యేక వేదిక."),
+  testimonialEyebrow: b("STEMGROW COMMUNITY", "స్టెమ్‌గ్రో సమాజం"), testimonialTitle: b("Farmer Experiences", "రైతుల అనుభవాలు"), testimonialCopy: b("Real experiences from Stemgrow customers will be added here.", "స్టెమ్‌గ్రో వినియోగదారుల నిజమైన అనుభవాలు ఇక్కడ జోడించబడతాయి."), testimonialSmall: b("A dedicated space for verified farmer feedback.", "ధృవీకరించిన రైతుల అభిప్రాయాల కోసం ప్రత్యేక వేదిక."),
   resourcesEyebrow: b("RESOURCES", "వనరులు"), insightsTitle: b("Agriculture Insights", "వ్యవసాయ అవగాహన"), insightsCopy: b("A structured resource area, ready for future articles and practical guidance.", "భవిష్యత్ వ్యాసాలు, ఆచరణాత్మక మార్గదర్శకాల కోసం సిద్ధంగా ఉన్న వనరుల విభాగం."),
   ctaEyebrow: b("LET’S FIND THE RIGHT FIT", "సరైన పరిష్కారాన్ని కనుగొందాం"), ctaTitle: b("Looking for the Right Solution for Your Crop?", "మీ పంటకు సరైన పరిష్కారం కోసం చూస్తున్నారా?"), ctaCopy: b("Talk to Stemgrow Agri Solutions about your crop requirements and explore suitable agricultural solutions.", "మీ పంట అవసరాల గురించి స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్‌తో మాట్లాడండి మరియు అనుకూల వ్యవసాయ పరిష్కారాలను తెలుసుకోండి."),
   contactEyebrow: b("CONTACT STEMGROW", "స్టెమ్‌గ్రోను సంప్రదించండి"), contactTitle: b("Let’s Grow Together", "కలిసి ఎదుగుదాం"), contactCopy: b("Share your crop requirement with us. We are here to help you explore the right Stemgrow solution.", "మీ పంట అవసరాన్ని మాతో పంచుకోండి. సరైన స్టెమ్‌గ్రో పరిష్కారాన్ని తెలుసుకోవడంలో మేము సహాయపడతాము."),
-  mapTitle: b("Company location", "కంపెనీ స్థానం"), directions: b("Get Directions", "దిశలు పొందండి"), call: b("Call Now", "కాల్ చేయండి"), email: b("Email Us", "ఇమెయిల్ పంపండి"),
-  name: b("Name", "పేరు"), phone: b("Mobile Number", "మొబైల్ నంబర్"), crop: b("Crop / Requirement", "పంట / అవసరం"), message: b("Message", "సందేశం"), send: b("Send Enquiry", "విచారణ పంపండి"),
+  mapTitle: b("Company location", "కంపెనీ స్థానం"), directions: b("Get Directions", "దిశలు పొందండి"), viewMap: b("View on Google Maps", "గూగుల్ మ్యాప్స్‌లో చూడండి"), call: b("Call Now", "కాల్ చేయండి"), email: b("Email Us", "ఇమెయిల్ పంపండి"),
+  name: b("Name", "పేరు"), phone: b("Mobile Number", "మొబైల్ నంబర్"), product: b("Product", "ఉత్పత్తి"), crop: b("Crop / Requirement", "పంట / అవసరం"), message: b("Message", "సందేశం"), send: b("Send Enquiry", "విచారణ పంపండి"), sending: b("Preparing Enquiry…", "విచారణను సిద్ధం చేస్తున్నాము…"),
   namePlaceholder: b("Your name", "మీ పేరు"), emailPlaceholder: b("name@example.com", "మీ ఇమెయిల్"), cropPlaceholder: b("Crop or requirement", "పంట లేదా అవసరం"), messagePlaceholder: b("Tell us how we can help", "మీ అవసరం గురించి మాకు తెలియజేయండి"),
-  formError: b("Please complete your name, mobile number and requirement.", "దయచేసి మీ పేరు, మొబైల్ నంబర్ మరియు అవసరాన్ని నమోదు చేయండి."), formSuccess: b("Your enquiry is ready to send through your email app.", "మీ ఇమెయిల్ యాప్ ద్వారా విచారణ పంపడానికి సిద్ధంగా ఉంది."),
+  formError: b("Please complete every field and enter a valid 10-digit mobile number and email address.", "దయచేసి అన్ని వివరాలను నమోదు చేసి, సరైన 10 అంకెల మొబైల్ నంబర్ మరియు ఇమెయిల్ చిరునామాను ఇవ్వండి."), formSuccess: b("Thank you. Your enquiry is ready in your email app — please send it to contact our team.", "ధన్యవాదాలు. మీ విచారణ ఇమెయిల్ యాప్‌లో సిద్ధంగా ఉంది — మా బృందాన్ని సంప్రదించడానికి దయచేసి పంపండి."),
   footerCopy: b("Practical agricultural solutions for crop nutrition, plant growth and biological crop protection.", "పంట పోషణ, మొక్కల పెరుగుదల మరియు జీవ ఆధారిత పంట రక్షణకు ఆచరణాత్మక వ్యవసాయ పరిష్కారాలు."), footerNav: b("Navigate", "నావిగేషన్"), footerProducts: b("Products", "ఉత్పత్తులు"), footerContact: b("Contact", "సంప్రదించండి"), copyright: b("© 2026 STEMGROW AGRI SOLUTIONS PRIVATE LIMITED. All rights reserved.", "© 2026 స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్ ప్రైవేట్ లిమిటెడ్. అన్ని హక్కులూ ప్రత్యేకించబడినవి."),
   policy: b("Use according to product label and recommended application practices.", "ఉత్పత్తి లేబుల్ మరియు సిఫార్సు చేసిన వినియోగ పద్ధతుల ప్రకారం ఉపయోగించండి."), view: b("View details", "వివరాలు చూడండి"), viewProducts: b("View products", "ఉత్పత్తులు చూడండి"), benefits: b("Benefits", "ప్రయోజనాలు"), composition: b("Composition / formulation", "కూర్పు / ఫార్ములేషన్"), application: b("Application", "వినియోగం"), dosage: b("Dosage", "మోతాదు"), method: b("Application method", "వినియోగ పద్ధతి"), enquiry: b("Enquire About This Product", "ఈ ఉత్పత్తి గురించి విచారించండి"), close: b("Close product details", "ఉత్పత్తి వివరాలను మూసివేయండి"), menu: b("Toggle menu", "మెనూ తెరవండి"), noProducts: b("No products found in this category.", "ఈ వర్గంలో ఉత్పత్తులు లేవు.")
 };
@@ -65,11 +67,18 @@ const categories = [
   ["04", "protection", b("Plant Protection & Crop Development", "మొక్కల రక్షణ & పంట అభివృద్ధి"), "Reflector", b("Phosphorus and potassium formulation supporting plant disease-resistance mechanisms.", "మొక్కల వ్యాధి నిరోధక యంత్రాంగాలకు తోడ్పడే ఫాస్ఫరస్, పొటాషియం ఉత్పత్తి.")]
 ];
 
-const needs = [["⌇", b("Root Development", "వేర్ల అభివృద్ధి")], ["◌", b("Nutrient Management", "పోషక నిర్వహణ")], ["↗", b("Plant Growth", "మొక్కల పెరుగుదల")], ["✦", b("Flowering", "పుష్పించడం")], ["●", b("Fruit Development", "పండ్ల అభివృద్ధి")], ["◒", b("Biological Protection", "జీవ ఆధారిత రక్షణ")]];
+const needs = [
+  ["01", "⌇", b("Root Development", "వేర్ల అభివృద్ధి"), b("A strong foundation for crop development.", "పంట అభివృద్ధికి బలమైన పునాది.")],
+  ["02", "◌", b("Nutrient Management", "పోషక నిర్వహణ"), b("Helping nutrition reach the crop effectively.", "పోషకాలు పంటకు సమర్థవంతంగా చేరడానికి తోడ్పాటు.")],
+  ["03", "↗", b("Plant Growth", "మొక్కల పెరుగుదల"), b("Practical support across key crop stages.", "ముఖ్యమైన పంట దశల్లో ఆచరణాత్మక మద్దతు.")],
+  ["04", "✦", b("Flowering", "పుష్పించడం"), b("Focused attention through flowering stages.", "పుష్పించే దశల్లో కేంద్రీకృత మద్దతు.")],
+  ["05", "●", b("Fruit Development", "పండ్ల అభివృద్ధి"), b("Support for developing fruit and crop quality.", "కాయలు, పండ్ల అభివృద్ధి మరియు పంట నాణ్యతకు మద్దతు.")],
+  ["06", "◒", b("Biological Protection", "జీవ ఆధారిత రక్షణ"), b("Responsible options within IPM practices.", "IPM విధానాల్లో బాధ్యతాయుతమైన ఎంపికలు.")]
+];
 const why = [["01", b("Practical Solutions", "ఆచరణాత్మక పరిష్కారాలు"), b("Solutions designed around crop requirements.", "పంట అవసరాలను దృష్టిలో పెట్టుకుని రూపొందించిన పరిష్కారాలు.")], ["02", b("Balanced Approach", "సమతుల్య విధానం"), b("Nutrition, plant growth and crop protection considered together.", "పోషణ, మొక్కల పెరుగుదల, పంట రక్షణను సమగ్రంగా పరిగణిస్తాము.")], ["03", b("Modern Agriculture", "ఆధునిక వ్యవసాయం"), b("Compatible with modern crop-management practices.", "ఆధునిక పంట నిర్వహణ పద్ధతులకు అనుకూలమైన పరిష్కారాలు.")], ["04", b("Farmer Focused", "రైతు కేంద్రిత"), b("Designed around practical agricultural requirements.", "ఆచరణాత్మక వ్యవసాయ అవసరాల ఆధారంగా రూపొందించబడింది.")]];
 const insights = [["01", b("Crop Nutrition", "పంట పోషణ"), b("A future home for practical crop-nutrition guidance.", "పంట పోషణపై ఆచరణాత్మక మార్గదర్శకానికి భవిష్యత్తు వేదిక.")], ["02", b("Plant Growth", "మొక్కల పెరుగుదల"), b("Resources can be added as crop-stage guidance develops.", "పంట దశల మార్గదర్శకం అభివృద్ధి చెందుతున్న కొద్దీ వనరులను జోడించవచ్చు.")], ["03", b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ"), b("A space for responsible crop-protection knowledge.", "బాధ్యతాయుత పంట రక్షణ జ్ఞానానికి ఒక వేదిక.")], ["04", b("Integrated Pest Management", "సమగ్ర కీటక నిర్వహణ"), b("Future articles can be structured here.", "భవిష్యత్ వ్యాసాలను ఇక్కడ క్రమబద్ధీకరించవచ్చు.")]];
 
-const nav = [["home", ui.navHome], ["about", ui.navAbout], ["products", ui.navProducts], ["approach", ui.navApproach], ["testimonials", ui.navTestimonials], ["contact", ui.navContact]];
+const nav = [["home", ui.navHome], ["about", ui.navAbout], ["solutions", ui.navSolutions], ["products", ui.navProducts], ["approach", ui.navApproach], ["contact", ui.navContact]];
 const filters = [["all", b("All Products", "అన్ని ఉత్పత్తులు")], ["nutrition", b("Crop Nutrition", "పంట పోషణ")], ["growth", b("Plant Growth", "మొక్కల పెరుగుదల")], ["biological", b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ")], ["protection", b("Plant Protection", "మొక్కల రక్షణ")]];
 
 function logo(light = false) {
@@ -96,8 +105,8 @@ function heading(eyebrow, title, copy = "", centered = false) {
 function productCard(product) {
   return `<article class="product-card">
     <div class="product-card__visual"><span class="product-card__category">${pick(categoryLabels[product.category])}</span><div class="product-card__halo"></div><img src="${product.image}" alt="${product.name} agricultural product package" loading="lazy"></div>
-    <div class="product-card__content"><h3>${product.name}</h3><p>${pick(product.description)}</p><ul>${product.benefits.slice(0, 2).map((benefit) => `<li>${pick(benefit)}</li>`).join("")}</ul>
-      <div class="product-card__footer"><span>${pick(product.method)}</span><button type="button" data-product="${product.id}" aria-label="${pick(ui.view)} ${product.name}">${pick(ui.view)}${arrow()}</button></div>
+    <div class="product-card__content"><h3>${product.name}</h3><p>${pick(product.description)}</p>
+      <div class="product-card__footer"><span class="product-card__application"><em>${pick(ui.application)}</em>${pick(product.method)}</span><button type="button" data-product="${product.id}" aria-label="${pick(ui.view)} ${product.name}">${pick(ui.view)}${arrow()}</button></div>
     </div>
   </article>`;
 }
@@ -117,7 +126,7 @@ function productModal() {
           <div><span>${pick(ui.method)}</span><strong>${pick(product.method)}</strong></div>
         </div>
         <div class="modal-benefits"><h3>${pick(ui.benefits)}</h3><ul>${product.benefits.map((benefit) => `<li>${pick(benefit)}</li>`).join("")}</ul></div>
-        <a class="button button--green" href="mailto:stemgrowagrisolutions@gmail.com?subject=${encodeURIComponent(`Enquiry about ${product.name}`)}">${pick(ui.enquiry)}${arrow()}</a><p class="label-note">${pick(ui.policy)}</p>
+        <div class="modal-actions"><button class="button button--green" type="button" data-enquire-product="${product.id}">${pick(ui.enquiry)}${arrow()}</button><a class="button button--outline" href="tel:+919133243325">${pick(ui.call)}</a><a class="modal-whatsapp" href="https://wa.me/919133243325?text=${encodeURIComponent(`Hello Stemgrow, I would like to enquire about ${product.name}.`)}" target="_blank" rel="noreferrer">WhatsApp</a></div><p class="label-note">${pick(ui.policy)}</p>
       </div>
     </section>
   </div>`;
@@ -129,7 +138,7 @@ function render() {
   root.className = `app ${locale === "te" ? "app--telugu" : ""}`;
   root.innerHTML = `
     <header class="site-header" id="site-header"><div class="container header-inner">
-      ${logo()}<nav class="desktop-nav" aria-label="Primary navigation">${nav.map(([id, label]) => `<button type="button" data-scroll="${id}">${pick(label)}</button>`).join("")}</nav>
+      ${logo()}<nav class="desktop-nav" aria-label="Primary navigation">${nav.map(([id, label]) => `<button type="button" data-scroll="${id}">${pick(label)}</button>`).join("")}<button type="button" class="mobile-nav-cta" data-scroll="contact">${pick(ui.talk)}${arrow()}</button></nav>
       <div class="header-actions">${languageSwitcher(true)}<button type="button" class="button button--gold header-contact" data-scroll="contact">${pick(ui.contact)}${arrow()}</button><button class="menu-toggle" type="button" data-menu aria-label="${pick(ui.menu)}" aria-expanded="false"><span></span><span></span><span></span></button></div>
     </div></header>
 
@@ -137,9 +146,9 @@ function render() {
       <section class="hero" id="home"><div class="hero__media" role="img" aria-label="${locale === "en" ? "Healthy agricultural crop field" : "ఆరోగ్యకరమైన వ్యవసాయ పంట పొలం"}"></div><div class="hero__overlay"></div>
         <div class="container hero__content"><p class="eyebrow eyebrow--light">${pick(ui.heroLabel)}</p><h1><span>${pick(ui.heroLead)}</span><span class="hero__gold">${pick(ui.heroTail)}</span></h1><p class="hero__copy">${pick(ui.heroCopy)}</p>
           <div class="hero__actions"><button class="button button--gold" type="button" data-scroll="products">${pick(ui.explore)}${arrow()}</button><button class="button button--ghost" type="button" data-scroll="contact">${pick(ui.talk)}</button></div>
-          <button class="text-link text-link--light" type="button" data-scroll="approach">${pick(ui.viewSolutions)}${arrow()}</button>
+          <button class="text-link text-link--light" type="button" data-scroll="solutions">${pick(ui.viewSolutions)}${arrow()}</button><span class="hero-scroll" aria-hidden="true"><i></i>${locale === "en" ? "Scroll to explore" : "చూడటానికి స్క్రోల్ చేయండి"}</span>
         </div><div class="hero__leaf" aria-hidden="true"></div>
-        <div class="hero__trust"><div class="container trust-grid"><div><strong>07</strong><span>${pick(ui.productCount)}</span></div><div><strong>${pick(ui.nutrition)}</strong><span>+</span></div><div><strong>${pick(ui.growth)}</strong><span>+</span></div><div><strong>${pick(ui.biological)}</strong><span></span></div></div></div>
+        <div class="hero__trust"><div class="container trust-grid"><div><strong>${pick(ui.nutrition)}</strong></div><div><strong>${pick(ui.growth)}</strong></div><div><strong>${pick(ui.biological)}</strong></div></div></div>
       </section>
 
       <section class="section about" id="about"><div class="container about-grid"><div class="about-visual reveal"><div class="about-visual__photo" role="img" aria-label="${locale === "en" ? "Close view of crops growing in a field" : "పొలంలో పెరుగుతున్న పంటల సమీప దృశ్యం"}"></div><div class="about-visual__card"><span>STEMGROW</span><strong>${locale === "en" ? "For crop needs, field by field." : "పంట అవసరాలకు, పొలం పొలంగా."}</strong></div><span class="about-visual__accent"></span></div>
@@ -148,25 +157,23 @@ function render() {
 
       <section class="section approach" id="approach"><div class="container">${heading(ui.approachEyebrow, ui.approachTitle, ui.approachCopy, true)}<div class="approach-grid">${approach.map(([number, icon, title, copy]) => `<article class="approach-card reveal"><div class="approach-card__top"><span class="approach-card__icon">${icon}</span><span>${number}</span></div><h3>${pick(title)}</h3><p>${pick(copy)}</p></article>`).join("")}</div></div></section>
 
-      <section class="section categories"><div class="container">${heading(ui.categoryEyebrow, ui.categoryTitle, ui.categoryCopy)}<div class="category-grid">${categories.map(([number, category, title, productNames, copy]) => `<button type="button" class="category-card reveal" data-filter="${category}" data-scroll="products"><span class="category-card__number">${number}</span><h3>${pick(title)}</h3><strong>${productNames}</strong><p>${pick(copy)}</p><span class="category-card__go">${pick(ui.viewProducts)}${arrow()}</span></button>`).join("")}</div></div></section>
+      <section class="section categories" id="solutions"><div class="container">${heading(ui.categoryEyebrow, ui.categoryTitle, ui.categoryCopy)}<div class="category-grid">${categories.map(([number, category, title, productNames, copy]) => `<button type="button" class="category-card category-card--${category} reveal" data-filter="${category}" data-scroll="products"><span class="category-card__number">${number}</span><h3>${pick(title)}</h3><strong>${productNames}</strong><p>${pick(copy)}</p><span class="category-card__go">${pick(ui.viewProducts)}${arrow()}</span></button>`).join("")}</div></div></section>
 
       <section class="section product-section" id="products"><div class="container">${heading(ui.catalogEyebrow, ui.catalogTitle, ui.catalogCopy, true)}<div class="product-filters" role="tablist" aria-label="${locale === "en" ? "Product categories" : "ఉత్పత్తి వర్గాలు"}">${filters.map(([id, label]) => `<button type="button" data-filter="${id}" class="${filter === id ? "is-active" : ""}" role="tab" aria-selected="${filter === id}">${pick(label)}</button>`).join("")}</div>
         <div class="product-grid" aria-live="polite">${shownProducts.map(productCard).join("")}</div>${shownProducts.length ? "" : `<p class="empty-state">${pick(ui.noProducts)}</p>`}<p class="product-section__note">${pick(ui.policy)}</p></div></section>
 
-      <section class="section crop-needs"><div class="container crop-needs-grid"><div class="crop-needs-copy reveal">${heading(ui.farmerEyebrow, ui.farmerTitle, ui.farmerCopy)}<div class="crop-needs-image" role="img" aria-label="${locale === "en" ? "Farmer examining crops" : "పంటలను పరిశీలిస్తున్న రైతు"}"></div></div><div class="need-grid">${needs.map(([icon, title]) => `<article class="need-card reveal"><span>${icon}</span><h3>${pick(title)}</h3><i></i></article>`).join("")}</div></div></section>
+      <section class="section crop-needs"><div class="container crop-needs-grid"><div class="crop-needs-copy reveal">${heading(ui.farmerEyebrow, ui.farmerTitle, ui.farmerCopy)}<div class="crop-needs-image" role="img" aria-label="${locale === "en" ? "Farmer examining crops" : "పంటలను పరిశీలిస్తున్న రైతు"}"></div></div><div class="need-grid">${needs.map(([number, icon, title, copy]) => `<article class="need-card reveal"><span class="need-card__number">${number}</span><span class="need-card__icon">${icon}</span><div><h3>${pick(title)}</h3><p>${pick(copy)}</p></div><i></i></article>`).join("")}</div></div></section>
 
       <section class="section why-section"><div class="container">${heading(ui.whyEyebrow, ui.whyTitle, ui.whyCopy)}<div class="why-grid">${why.map(([number, title, copy]) => `<article class="why-card reveal"><span>${number}</span><h3>${pick(title)}</h3><p>${pick(copy)}</p></article>`).join("")}</div></div></section>
 
       <section class="section testimonials" id="testimonials"><div class="container testimonial-layout">${heading(ui.testimonialEyebrow, ui.testimonialTitle)}<div class="testimonial-placeholder reveal"><span class="quote-mark">“</span><blockquote>${pick(ui.testimonialCopy)}</blockquote><p>${pick(ui.testimonialSmall)}</p><span class="testimonial-placeholder__line"></span></div></div></section>
 
-      <section class="section insights"><div class="container">${heading(ui.resourcesEyebrow, ui.insightsTitle, ui.insightsCopy, true)}<div class="insight-grid">${insights.map(([index, title, copy]) => `<article class="insight-card reveal"><span>${index}</span><h3>${pick(title)}</h3><p>${pick(copy)}</p><div class="insight-card__arrow">${arrow()}</div></article>`).join("")}</div></div></section>
-
       <section class="cta-section"><div class="cta-section__crop" aria-hidden="true"></div><div class="container cta-content"><p class="eyebrow eyebrow--light">${pick(ui.ctaEyebrow)}</p><h2>${pick(ui.ctaTitle)}</h2><p>${pick(ui.ctaCopy)}</p><div><button class="button button--gold" type="button" data-scroll="contact">${pick(ui.talk)}${arrow()}</button><button class="button button--ghost" type="button" data-scroll="products">${pick(ui.explore)}</button></div></div></section>
 
       <section class="section contact-section" id="contact"><div class="container">${heading(ui.contactEyebrow, ui.contactTitle, ui.contactCopy)}<div class="contact-grid">
         <div class="contact-details reveal"><div class="company-name">STEMGROW AGRI SOLUTIONS <span>PRIVATE LIMITED</span></div><address>${locale === "en" ? "H. No. 2-84/3/237/EP, Ground Floor,<br>Near Akshaya Enclave, Chinna Kranthi Colony,<br>Chengicherla, Peerzadiguda,<br>Hyderabad, Telangana, India, 500039" : "హెచ్. నెం. 2-84/3/237/EP, గ్రౌండ్ ఫ్లోర్,<br>అక్షయ ఎన్‌క్లేవ్ సమీపంలో, చిన్న క్రాంతి కాలనీ,<br>చెంగిచెర్ల, పీర్జాదిగూడ,<br>హైదరాబాద్, తెలంగాణ, భారతదేశం, 500039"}</address><div class="contact-links"><a href="tel:+919133243325"><span>◉</span>9133243325</a><a href="tel:+917981312887"><span>◉</span>7981312887</a><a href="mailto:stemgrowagrisolutions@gmail.com"><span>✉</span>stemgrowagrisolutions@gmail.com</a></div><div class="quick-actions"><a class="quick-action quick-action--whatsapp" href="https://wa.me/919133243325" target="_blank" rel="noreferrer">◌ WhatsApp</a><a class="quick-action" href="tel:+919133243325">⌕ ${pick(ui.call)}</a><a class="quick-action" href="mailto:stemgrowagrisolutions@gmail.com">✉ ${pick(ui.email)}</a></div></div>
-        <div class="contact-form-wrap reveal"><form class="contact-form" id="contact-form" novalidate><div class="form-row"><label>${pick(ui.name)}<input name="name" autocomplete="name" placeholder="${pick(ui.namePlaceholder)}"></label><label>${pick(ui.phone)}<input name="phone" inputmode="tel" autocomplete="tel" placeholder="+91"></label></div><div class="form-row"><label>${pick(ui.email)}<input name="email" type="email" autocomplete="email" placeholder="${pick(ui.emailPlaceholder)}"></label><label>${pick(ui.crop)}<input name="crop" placeholder="${pick(ui.cropPlaceholder)}"></label></div><label>${pick(ui.message)}<textarea name="message" rows="4" placeholder="${pick(ui.messagePlaceholder)}"></textarea></label><p class="form-status" role="status" hidden></p><button class="button button--green" type="submit">${pick(ui.send)}${arrow()}</button></form></div>
-      </div><div class="map-card reveal"><div class="map-card__head"><div><p class="eyebrow">${pick(ui.mapTitle)}</p><h3>Hyderabad, Telangana</h3></div><a href="https://www.google.com/maps/search/?api=1&amp;query=H.+No.+2-84%2F3%2F237%2FEP%2C+Chengicherla%2C+Peerzadiguda%2C+Hyderabad%2C+Telangana+500039" target="_blank" rel="noreferrer">${pick(ui.directions)}${arrow()}</a></div><iframe title="${pick(ui.mapTitle)}" loading="lazy" src="https://www.google.com/maps?q=H.%20No.%202-84%2F3%2F237%2FEP%2C%20Chengicherla%2C%20Peerzadiguda%2C%20Hyderabad%2C%20Telangana%20500039&amp;output=embed"></iframe></div></div></section>
+        <div class="contact-form-wrap reveal"><form class="contact-form" id="contact-form" novalidate><div class="form-row"><label>${pick(ui.name)}<input name="name" autocomplete="name" required placeholder="${pick(ui.namePlaceholder)}"></label><label>${pick(ui.phone)}<input name="phone" inputmode="tel" autocomplete="tel" required pattern="[0-9+() -]{10,}" placeholder="+91"></label></div>${prefillProduct ? `<label class="product-prefill">${pick(ui.product)}<input name="product" value="${esc(prefillProduct)}" readonly aria-readonly="true"></label>` : ""}<div class="form-row"><label>${pick(ui.email)}<input name="email" type="email" autocomplete="email" required placeholder="${pick(ui.emailPlaceholder)}"></label><label>${pick(ui.crop)}<input name="crop" required placeholder="${pick(ui.cropPlaceholder)}"></label></div><label>${pick(ui.message)}<textarea name="message" rows="4" required placeholder="${pick(ui.messagePlaceholder)}"></textarea></label><p class="form-status ${formState === "error" ? "form-status--error" : formState === "success" ? "form-status--success" : ""}" role="status" aria-live="polite" ${formState === "idle" ? "hidden" : ""}>${formState === "error" ? pick(ui.formError) : formState === "success" ? pick(ui.formSuccess) : ""}</p><button class="button button--green" type="submit" ${formState === "loading" ? "disabled" : ""}>${formState === "loading" ? pick(ui.sending) : pick(ui.send)}${formState === "loading" ? "" : arrow()}</button></form></div>
+      </div><div class="map-card reveal"><div class="map-card__head"><div><p class="eyebrow">${pick(ui.mapTitle)}</p><h3>Hyderabad, Telangana</h3></div><div class="map-card__actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=H.+No.+2-84%2F3%2F237%2FEP%2C+Chengicherla%2C+Peerzadiguda%2C+Hyderabad%2C+Telangana+500039" target="_blank" rel="noreferrer">${pick(ui.viewMap)}</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=H.+No.+2-84%2F3%2F237%2FEP%2C+Chengicherla%2C+Peerzadiguda%2C+Hyderabad%2C+Telangana+500039" target="_blank" rel="noreferrer">${pick(ui.directions)}${arrow()}</a></div></div><iframe title="${pick(ui.mapTitle)}" loading="lazy" src="https://www.google.com/maps?q=H.%20No.%202-84%2F3%2F237%2FEP%2C%20Chengicherla%2C%20Peerzadiguda%2C%20Hyderabad%2C%20Telangana%20500039&amp;output=embed"></iframe></div></div></section>
     </main>
 
     <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand">${logo(true)}<p>${pick(ui.footerCopy)}</p>${languageSwitcher()}</div><div><h3>${pick(ui.footerNav)}</h3><ul>${nav.map(([id, label]) => `<li><button type="button" data-scroll="${id}">${pick(label)}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerProducts)}</h3><ul>${products.map((product) => `<li><button type="button" data-product="${product.id}">${product.name}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerContact)}</h3><address>${locale === "en" ? "H. No. 2-84/3/237/EP, Ground Floor, Chengicherla, Peerzadiguda, Hyderabad, Telangana, India, 500039" : "హెచ్. నెం. 2-84/3/237/EP, గ్రౌండ్ ఫ్లోర్, చెంగిచెర్ల, పీర్జాదిగూడ, హైదరాబాద్, తెలంగాణ, భారతదేశం, 500039"}</address><a href="tel:+919133243325">9133243325</a><a href="mailto:stemgrowagrisolutions@gmail.com">stemgrowagrisolutions@gmail.com</a></div></div><div class="container footer-bottom"><span>${pick(ui.copyright)}</span><span>${pick(ui.policy)}</span></div></footer>
@@ -194,6 +201,17 @@ root.addEventListener("click", (event) => {
   if (target.dataset.closeModal !== undefined) { selectedProduct = null; refresh(); return; }
   if (target.dataset.lang) { locale = target.dataset.lang; refresh(); return; }
   if (target.dataset.filter) { filter = target.dataset.filter; refresh(); if (target.dataset.scroll) document.querySelector("#products")?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+  if (target.dataset.enquireProduct) {
+    const product = products.find((entry) => entry.id === target.dataset.enquireProduct);
+    if (!product) return;
+    prefillProduct = product.name;
+    selectedProduct = null;
+    formState = "idle";
+    refresh(false);
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => document.querySelector("#contact-form input[name='name']")?.focus(), 500);
+    return;
+  }
   if (target.dataset.product) { selectedProduct = target.dataset.product; refresh(); return; }
   if (target.dataset.menu !== undefined) { const navElement = document.querySelector(".desktop-nav"); const open = navElement.classList.toggle("is-open"); target.setAttribute("aria-expanded", String(open)); return; }
   if (target.dataset.scroll) { event.preventDefault(); document.querySelector(".desktop-nav")?.classList.remove("is-open"); document.querySelector("[data-menu]")?.setAttribute("aria-expanded", "false"); document.getElementById(target.dataset.scroll)?.scrollIntoView({ behavior: "smooth", block: "start" }); }
@@ -207,15 +225,42 @@ root.addEventListener("submit", (event) => {
   const name = String(data.get("name") ?? "").trim();
   const phone = String(data.get("phone") ?? "").trim();
   const crop = String(data.get("crop") ?? "").trim();
+  const product = String(data.get("product") ?? prefillProduct).trim();
   const status = form.querySelector(".form-status");
-  status.hidden = false;
-  if (!name || !phone || !crop) { status.className = "form-status form-status--error"; status.textContent = pick(ui.formError); return; }
+  const phoneDigits = phone.replace(/\D/g, "");
+  const localMobile = phoneDigits.length === 12 && phoneDigits.startsWith("91") ? phoneDigits.slice(2) : phoneDigits;
+  if (!name || !crop || !/^[6-9]\d{9}$/.test(localMobile)) {
+    formState = "error";
+    status.hidden = false;
+    status.className = "form-status form-status--error";
+    status.textContent = pick(ui.formError);
+    return;
+  }
   const email = String(data.get("email") ?? "").trim();
   const message = String(data.get("message") ?? "").trim();
-  status.className = "form-status form-status--success";
-  status.textContent = pick(ui.formSuccess);
-  const body = `Name: ${name}\nMobile: ${phone}\nEmail: ${email}\nCrop / Requirement: ${crop}\n\nMessage:\n${message}`;
-  window.setTimeout(() => { window.location.href = `mailto:stemgrowagrisolutions@gmail.com?subject=${encodeURIComponent("Website enquiry")}&body=${encodeURIComponent(body)}`; }, 180);
+  const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if (!validEmail || !message) {
+    formState = "error";
+    status.hidden = false;
+    status.className = "form-status form-status--error";
+    status.textContent = pick(ui.formError);
+    return;
+  }
+  const submitButton = form.querySelector("button[type='submit']");
+  formState = "loading";
+  status.hidden = true;
+  submitButton.disabled = true;
+  submitButton.textContent = pick(ui.sending);
+  const body = `Product: ${product || "Not specified"}\nName: ${name}\nMobile: ${phone}\nEmail: ${email}\nCrop / Requirement: ${crop}\n\nMessage:\n${message}`;
+  window.setTimeout(() => {
+    formState = "success";
+    status.hidden = false;
+    status.className = "form-status form-status--success";
+    status.textContent = pick(ui.formSuccess);
+    submitButton.disabled = false;
+    submitButton.innerHTML = `${pick(ui.send)}${arrow()}`;
+    window.location.href = `mailto:stemgrowagrisolutions@gmail.com?subject=${encodeURIComponent(product ? `Website enquiry — ${product}` : "Website enquiry")}&body=${encodeURIComponent(body)}`;
+  }, 420);
 });
 
 document.addEventListener("keydown", (event) => { if (event.key === "Escape" && selectedProduct) { selectedProduct = null; refresh(); } });

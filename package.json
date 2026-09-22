@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/static-server.mjs",
-    "build": "node scripts/verify-static.mjs",
+    "build": "node scripts/verify-static.mjs && node scripts/smoke-site.mjs",
     "preview": "node scripts/static-server.mjs"
   }
 }
