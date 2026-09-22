@@ -37,13 +37,13 @@ img { display: block; max-width: 100%; }
 .app--telugu, .app--telugu button, .app--telugu input, .app--telugu textarea { font-family: "Noto Sans Telugu", "Nirmala UI", sans-serif; }
 .container { width: min(1180px, calc(100% - 48px)); margin-inline: auto; }
 .section { padding: 124px 0; position: relative; }
-.eyebrow { margin: 0 0 14px; color: var(--green-700); font-size: 0.7rem; line-height: 1.4; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
+.eyebrow { margin: 0 0 16px; color: var(--green-700); font-size: 0.72rem; line-height: 1.4; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
 .app--telugu .eyebrow { letter-spacing: 0.04em; }
 .eyebrow--light { color: var(--gold-light); }
 .section-heading { max-width: 660px; margin-bottom: 46px; }
 .section-heading--center { text-align: center; margin-inline: auto; }
-.section-heading h2, .cta-content h2 { margin: 0; color: var(--green-900); font-size: clamp(2.05rem, 4vw, 3.6rem); letter-spacing: -0.065em; line-height: 1.07; }
-.app--telugu .section-heading h2, .app--telugu .cta-content h2 { letter-spacing: -0.035em; line-height: 1.32; }
+.section-heading h2, .cta-content h2 { margin: 0; color: var(--green-900); font-size: clamp(2.05rem, 4vw, 3.4rem); letter-spacing: -0.025em; line-height: 1.18; }
+.app--telugu .section-heading h2, .app--telugu .cta-content h2 { letter-spacing: 0; line-height: 1.34; }
 .section-heading > p:last-child { margin: 18px 0 0; max-width: 600px; color: var(--muted); line-height: 1.78; font-size: 0.97rem; }
 .section-heading--center > p:last-child { margin-inline: auto; }
 
@@ -94,17 +94,18 @@ img { display: block; max-width: 100%; }
 .hero__media::after { position: absolute; z-index: 1; inset: 0; background: linear-gradient(115deg, rgba(8,63,41,.18), transparent 48%); content: ""; pointer-events: none; }
 .hero__overlay { z-index: -1; background: linear-gradient(90deg, rgba(3,35,23,.98) 0%, rgba(5,49,32,.9) 40%, rgba(6,50,33,.48) 63%, rgba(5,43,30,.3) 100%), linear-gradient(0deg, rgba(3,34,22,.78), transparent 48%); }
 .hero__content { position: relative; z-index: 1; padding-top: 156px; padding-bottom: 120px; }
-.hero h1 { max-width: 760px; margin: 0; font-size: clamp(3.4rem, 7vw, 6.55rem); letter-spacing: -0.08em; line-height: .99; font-weight: 800; }
-.app--telugu .hero h1 { max-width: 760px; font-size: clamp(2.8rem, 6.3vw, 5.7rem); letter-spacing: -0.04em; line-height: 1.26; }
+.hero .eyebrow { margin-bottom: 20px; letter-spacing: 0.18em; font-size: 0.75rem; }
+.hero h1 { max-width: 780px; margin: 0; font-size: clamp(3.2rem, 6.4vw, 5.8rem); letter-spacing: -0.025em; line-height: 1.16; font-weight: 800; }
+.app--telugu .hero h1 { max-width: 780px; font-size: clamp(2.6rem, 5.5vw, 4.9rem); letter-spacing: 0; line-height: 1.34; }
 .hero h1 span { display: block; }
-.hero__line { overflow: hidden; padding: .03em 0 .1em; }
+.hero__line { overflow: hidden; padding: .04em 0 .14em; }
 .hero__line > span { transform: translate3d(112%, 0, 0); opacity: 0; animation: heroLineSlide .9s cubic-bezier(.22,.8,.2,1) .2s forwards; }
 .hero__line + .hero__line > span { animation-delay: .38s; }
 .hero__gold { color: var(--gold-light); }
-.hero__copy { max-width: 620px; margin: 26px 0 30px; color: rgba(255,255,255,.82); font-size: clamp(.98rem, 1.6vw, 1.08rem); line-height: 1.82; animation: heroContentIn .65s ease-out .63s both; }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 14px; animation: heroContentIn .65s ease-out .78s both; }
+.hero__copy { max-width: 640px; margin: 28px 0 34px; color: rgba(255,255,255,.88); font-size: clamp(1rem, 1.6vw, 1.1rem); line-height: 1.82; animation: heroContentIn .65s ease-out .63s both; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 16px; animation: heroContentIn .65s ease-out .78s both; }
 .hero .text-link--light { animation: heroContentIn .65s ease-out .93s both; }
-.text-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; border: 0; padding: 0; color: var(--green-800); background: transparent; cursor: pointer; font-size: .78rem; font-weight: 800; text-decoration: none; }
+.text-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 26px; border: 0; padding: 0; color: var(--green-800); background: transparent; cursor: pointer; font-size: .8rem; font-weight: 800; text-decoration: none; }
 .text-link--light { color: var(--white); }
 .hero__leaf { position: absolute; z-index: 0; right: -4vw; top: 10%; width: min(38vw, 530px); aspect-ratio: 1; border: 1px solid rgba(235, 207, 109, .23); border-radius: 78% 22% 65% 35%; transform: rotate(-27deg); opacity: .55; pointer-events: none; }
 .hero__leaf::before, .hero__leaf::after { position: absolute; content: ""; background: linear-gradient(90deg, transparent, rgba(239, 207, 108, .5), transparent); }
@@ -357,13 +358,6 @@ img { display: block; max-width: 100%; }
   .language-switcher--compact button { padding: 6px 7px; font-size: .59rem; }
   .header-actions { gap: 3px; }
   .menu-toggle { width: 36px; }
-  .hero { min-height: 640px; }
-  .hero__content { padding-top: 130px; padding-bottom: 96px; }
-  .hero h1 { font-size: clamp(2.35rem, 11vw, 2.95rem); }
-  .app--telugu .hero h1 { font-size: clamp(2.05rem, 10vw, 2.75rem); }
-  .hero__copy { margin: 20px 0 24px; font-size: .96rem; line-height: 1.72; }
-  .hero__actions { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .hero__actions .button { min-width: 0; padding-inline: 11px; font-size: .86rem; }
   .hero__leaf { top: 4%; width: 68vw; }
   .section-heading { margin-bottom: 32px; }
   .section-heading h2, .cta-content h2 { font-size: 2rem; }
@@ -796,17 +790,17 @@ body { font-size: 16px; }
 .product-modal__visual--reflector img { object-fit: contain; padding: 20px; background: #0c2d20; }
 
 /* A dedicated mobile crop composition keeps the hero visual, readable and intentional. */
-/* A dedicated mobile crop composition keeps the hero visual, readable and intentional. */
 @media (max-width: 560px) {
-  .hero { min-height: 630px; }
-  .hero__content { padding-top: 130px; padding-bottom: 92px; }
-  .hero h1 { max-width: 100%; font-size: clamp(2.35rem, 11vw, 2.95rem); }
-  .app--telugu .hero h1 { font-size: clamp(2.05rem, 10vw, 2.75rem); }
-  .hero__line { padding-bottom: .06em; }
-  .hero__copy { margin: 20px 0 24px; line-height: 1.72; font-size: .96rem; }
-  .hero__actions { display: grid; grid-template-columns: 1fr; gap: 12px; }
-  .hero__actions .button { width: 100%; min-height: 50px; font-size: .86rem; }
-  .hero .text-link--light { display: inline-flex; margin-top: 20px; font-size: .82rem; }
+  .hero { min-height: 610px; }
+  .hero__content { padding-top: 112px; padding-bottom: 84px; }
+  .hero .eyebrow { margin-bottom: 18px; font-size: .72rem; letter-spacing: .16em; }
+  .hero h1 { max-width: 100%; font-size: clamp(2.15rem, 9.2vw, 2.65rem); letter-spacing: -0.02em; line-height: 1.18; }
+  .app--telugu .hero h1 { font-size: clamp(1.9rem, 8.4vw, 2.35rem); letter-spacing: 0; line-height: 1.34; }
+  .hero__line { padding-bottom: .08em; }
+  .hero__copy { margin: 22px 0 28px; line-height: 1.74; font-size: .94rem; color: rgba(255,255,255,.9); }
+  .hero__actions { display: grid; grid-template-columns: 1fr; gap: 13px; }
+  .hero__actions .button { width: 100%; min-height: 52px; font-size: .88rem; padding: 14px 20px; }
+  .hero .text-link--light { display: inline-flex; margin-top: 22px; font-size: .82rem; }
   .hero__slide { inset: 0; }
   .hero__slide--cotton { background-image: url("https://images.pexels.com/photos/20344345/pexels-photo-20344345.jpeg?auto=compress&cs=tinysrgb&w=1400"); background-position: 63% center; }
   .hero__slide--maize { background-position: 64% center; }
@@ -815,14 +809,15 @@ body { font-size: 16px; }
 }
 
 @media (max-width: 390px) {
-  .hero { min-height: 590px; }
-  .hero__content { padding-top: 118px; padding-bottom: 80px; }
-  .hero h1 { font-size: clamp(2.15rem, 10vw, 2.55rem); }
-  .app--telugu .hero h1 { font-size: clamp(1.9rem, 9.2vw, 2.3rem); }
-  .hero__copy { max-width: 31rem; margin: 16px 0 20px; font-size: .89rem; line-height: 1.65; }
-  .hero__actions { gap: 10px; }
-  .hero__actions .button { min-height: 46px; font-size: .82rem; }
-  .hero .text-link--light { margin-top: 18px; font-size: .78rem; }
+  .hero { min-height: 580px; }
+  .hero__content { padding-top: 104px; padding-bottom: 74px; }
+  .hero .eyebrow { margin-bottom: 15px; font-size: .68rem; letter-spacing: .14em; }
+  .hero h1 { font-size: clamp(1.95rem, 8.8vw, 2.35rem); letter-spacing: -0.015em; line-height: 1.18; }
+  .app--telugu .hero h1 { font-size: clamp(1.75rem, 8vw, 2.15rem); letter-spacing: 0; line-height: 1.34; }
+  .hero__copy { max-width: 31rem; margin: 18px 0 24px; font-size: .88rem; line-height: 1.68; }
+  .hero__actions { gap: 11px; }
+  .hero__actions .button { min-height: 48px; font-size: .84rem; padding: 13px 18px; }
+  .hero .text-link--light { margin-top: 19px; font-size: .78rem; }
 }
 
 /* Keep product details easy to exit on every screen. */
