@@ -853,3 +853,8 @@ body { font-size: 16px; }
   .hero__content { padding-top: 92px; }
   .hero__copy { max-width: 31rem; }
 }
+
+/* Keep product details easy to exit on every screen. */
+.modal-back { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; border: 0; padding: 8px 4px; color: var(--green-700); background: transparent; cursor: pointer; font-size: .78rem; font-weight: 800; }
+.modal-back:hover { color: var(--green-950); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 560px) { .modal-back { margin-left: auto; min-height: 38px; font-size: .74rem; } }

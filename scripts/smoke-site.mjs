@@ -33,7 +33,15 @@ assert.ok(root.innerHTML.includes("approach-card__watermark"), "Approach cards s
 assert.ok(root.innerHTML.includes("whatsapp-float") && root.innerHTML.includes("whatsapp-icon"), "WhatsApp action should be clearly branded");
 assert.ok(root.innerHTML.includes("hero__line") && root.innerHTML.includes("hero__slide--cotton") && root.innerHTML.includes("hero__slide--maize") && root.innerHTML.includes("hero__slide--mirchi"), "Hero should render the cotton, maize and mirchi slideshow");
 assert.ok(root.innerHTML.includes("/products/supplied-packshots/stemgrow-plus.jpeg") && root.innerHTML.includes("/products/supplied-packshots/reflector.jpeg"), "Catalogue should use the supplied product packshots");
+assert.ok(root.innerHTML.includes("wa.me/917981312887") && !root.innerHTML.includes("wa.me/919133243325"), "Every WhatsApp action should use the approved 7981312887 number");
 assert.ok(!/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/u.test(root.innerHTML), "Decorative emoji-style glyphs should not render in the UI");
+
+const productButton = { dataset: { product: "stemgrow-plus" }, closest() { return this; } };
+listeners.get("click")({ target: productButton });
+assert.ok(root.innerHTML.includes("product-modal") && root.innerHTML.includes("Back to products"), "View details should open a product modal with a visible exit action");
+const closeButton = { dataset: { closeModal: "" }, closest() { return this; } };
+listeners.get("click")({ target: closeButton });
+assert.ok(!root.innerHTML.includes('class="product-modal"'), "Product detail exit should return visitors to the catalogue");
 
 const languageButton = { dataset: { lang: "te" }, closest() { return this; } };
 listeners.get("click")({ target: languageButton });
