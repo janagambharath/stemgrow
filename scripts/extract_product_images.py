@@ -10,7 +10,7 @@ import pymupdf
 
 
 SOURCE = Path(r"C:\Users\bhara\Downloads\leafler_Curve.pdf")
-DESTINATION = Path(__file__).resolve().parents[1] / "public" / "products" / "source-extracts"
+DESTINATION = Path(__file__).resolve().parents[1] / "products" / "source-extracts"
 
 
 def main() -> None:

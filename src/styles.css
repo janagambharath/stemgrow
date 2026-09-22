@@ -557,3 +557,187 @@ body { font-size: 16px; }
   .modal-actions { position: sticky; z-index: 2; bottom: -1px; margin: 0 -2px; padding: 13px 2px 10px; background: var(--white); box-shadow: 0 -12px 20px rgba(255,255,255,.9); }
   .modal-actions .button:first-child { flex: 1 1 100%; }
 }
+
+/* Final visual refinement: a more dimensional field treatment and clear WhatsApp access. */
+.approach {
+  isolation: isolate;
+  padding-block: clamp(106px, 10vw, 152px);
+  background:
+    radial-gradient(circle at 9% 112%, rgba(49, 124, 77, .72), transparent 34%),
+    radial-gradient(circle at 96% 0%, rgba(36, 113, 68, .52), transparent 36%),
+    linear-gradient(133deg, #032a1e 0%, #063d2b 48%, #052b20 100%);
+}
+.approach::before {
+  z-index: 0;
+  top: -16rem;
+  right: -10rem;
+  width: min(52vw, 720px);
+  height: min(52vw, 720px);
+  border-color: rgba(239, 207, 108, .22);
+  box-shadow: 0 0 0 82px rgba(239, 207, 108, .025), 0 0 0 172px rgba(239, 207, 108, .018);
+}
+.approach::after {
+  position: absolute;
+  z-index: 0;
+  right: -14%;
+  bottom: -26%;
+  width: 62%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(214, 235, 191, .1);
+  border-radius: 48% 52% 0 0;
+  content: "";
+  transform: rotate(-21deg);
+}
+.approach__field {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: .9;
+  background:
+    linear-gradient(112deg, transparent 0 46%, rgba(235, 248, 220, .032) 46.1% 46.22%, transparent 46.35%),
+    repeating-radial-gradient(ellipse at 100% 118%, transparent 0 66px, rgba(239, 207, 108, .105) 67px 68px, transparent 69px 113px);
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 100%);
+}
+.approach .container { position: relative; z-index: 1; }
+.approach .section-heading { position: relative; margin-bottom: 54px; }
+.approach .section-heading::after {
+  display: block;
+  width: 62px;
+  height: 2px;
+  margin: 24px auto 0;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+  content: "";
+}
+.approach-grid { gap: 18px; }
+.approach-card {
+  isolation: isolate;
+  min-height: 278px;
+  padding: 30px;
+  border-color: rgba(214, 235, 191, .17);
+  border-radius: 16px;
+  background:
+    linear-gradient(145deg, rgba(31, 105, 68, .91), rgba(5, 53, 37, .92)),
+    rgba(5, 53, 37, .92);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 22px 38px rgba(0, 22, 14, .12);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease, background .28s ease;
+}
+.approach-card::before {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  right: 0;
+  width: 52%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(239, 207, 108, .12), transparent 50%);
+  content: "";
+  opacity: .55;
+}
+.approach-card > * { position: relative; z-index: 1; }
+.approach-card:nth-child(2), .approach-card:nth-child(5) { background: linear-gradient(145deg, rgba(17, 78, 54, .94), rgba(4, 48, 34, .94)); }
+.approach-card:nth-child(3), .approach-card:nth-child(6) { background: linear-gradient(145deg, rgba(13, 70, 49, .95), rgba(3, 43, 31, .96)); }
+.approach-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(239, 207, 108, .62);
+  background: linear-gradient(145deg, rgba(41, 123, 77, .96), rgba(6, 62, 43, .97));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 28px 48px rgba(0, 22, 14, .34);
+}
+.approach-card__watermark {
+  position: absolute !important;
+  z-index: 0 !important;
+  right: 22px;
+  bottom: -23px;
+  color: rgba(239, 207, 108, .09);
+  font-size: clamp(5rem, 8vw, 7.7rem);
+  font-weight: 800;
+  letter-spacing: -.1em;
+  line-height: 1;
+  pointer-events: none;
+}
+.approach-card__top { color: rgba(239, 207, 108, .72); }
+.approach-card__icon {
+  width: 43px;
+  height: 43px;
+  border: 1px solid rgba(239, 207, 108, .16);
+  border-radius: 12px;
+  background: rgba(239, 207, 108, .13);
+}
+.approach-card h3 { margin-top: 39px; }
+.approach-card p { max-width: 300px; color: rgba(255, 255, 255, .71); }
+.approach-card__rule {
+  display: block;
+  width: 34px;
+  height: 2px;
+  margin-top: 28px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--gold-light), transparent);
+  transition: width .28s ease;
+}
+.approach-card:hover .approach-card__rule { width: 72px; }
+
+.whatsapp-icon { display: block; flex: 0 0 auto; width: 20px; height: 20px; }
+.quick-action--whatsapp {
+  --whatsapp-icon-phone: #29b95f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #f5ffed;
+  background: linear-gradient(135deg, #1caa5b, #148745);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+.quick-action--whatsapp .whatsapp-icon { width: 21px; height: 21px; }
+.modal-whatsapp {
+  --whatsapp-icon-phone: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 8px 11px;
+  border: 1px solid #bcdcc4;
+  border-radius: 99px;
+  color: #148445;
+  background: #f2fbf2;
+}
+.modal-whatsapp:hover { color: #0c7139; background: #e6f7e8; }
+.modal-whatsapp .whatsapp-icon { width: 17px; height: 17px; }
+.whatsapp-float {
+  --whatsapp-icon-phone: #25a85c;
+  right: 22px;
+  bottom: 22px;
+  gap: 10px;
+  min-height: 52px;
+  padding: 12px 18px 12px 12px;
+  border-color: rgba(255, 255, 255, .48);
+  color: #fff;
+  background: linear-gradient(135deg, #2cbe66, #148d49);
+  box-shadow: 0 15px 34px rgba(4, 64, 31, .38), inset 0 1px 0 rgba(255, 255, 255, .2);
+  font-size: .78rem;
+}
+.whatsapp-float .whatsapp-icon { width: 25px; height: 25px; }
+.whatsapp-float::before { inset: -6px; border-color: rgba(52, 202, 103, .52); }
+
+@media (max-width: 840px) {
+  .approach { padding-block: 98px; }
+  .approach-card { min-height: 248px; }
+}
+
+@media (max-width: 560px) {
+  .approach { padding-block: 76px; }
+  .approach::before { top: -11rem; right: -13rem; width: 430px; height: 430px; }
+  .approach__field { opacity: .64; mask-image: none; }
+  .approach .section-heading { margin-bottom: 38px; }
+  .approach .section-heading::after { margin-top: 19px; }
+  .approach-grid { gap: 13px; }
+  .approach-card { min-height: 220px; padding: 25px; border-radius: 14px; }
+  .approach-card h3 { margin-top: 29px; font-size: 1.08rem; }
+  .approach-card p { font-size: .86rem; }
+  .approach-card__rule { margin-top: 21px; }
+  .whatsapp-float { right: 14px; bottom: 14px; min-height: 48px; padding: 10px 14px 10px 10px; font-size: .72rem; }
+  .whatsapp-float span { display: inline; }
+  .whatsapp-float .whatsapp-icon { width: 23px; height: 23px; }
+  .quick-action--whatsapp .whatsapp-icon { width: 19px; height: 19px; }
+}

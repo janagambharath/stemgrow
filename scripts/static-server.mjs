@@ -8,9 +8,16 @@ const types = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg
 
 function safeFile(pathname) {
   const cleaned = normalize(decodeURIComponent(pathname)).replace(/^([/\\])+/, "");
-  const base = pathname.startsWith("/products/") || ["/favicon.svg", "/og-stemgrow.svg", "/robots.txt", "/sitemap.xml"].includes(pathname) ? publicRoot : root;
-  const file = resolve(base, cleaned);
-  return file.startsWith(base) ? file : null;
+  // Keep product files at the site root for Render Static Sites, while also
+  // accepting the legacy public/ location during local development.
+  const bases = pathname.startsWith("/products/") || ["/favicon.svg", "/og-stemgrow.svg", "/robots.txt", "/sitemap.xml"].includes(pathname)
+    ? [root, publicRoot]
+    : [root];
+  for (const base of bases) {
+    const file = resolve(base, cleaned);
+    if (file.startsWith(base) && existsSync(file)) return file;
+  }
+  return null;
 }
 
 createServer((request, response) => {
@@ -18,7 +25,7 @@ createServer((request, response) => {
   const file = pathname === "/" ? join(root, "index.html") : safeFile(pathname);
   if (!file || !existsSync(file)) {
     response.writeHead(404, { "Content-Type": "text/html" });
-    createReadStream(join(publicRoot, "404.html")).pipe(response);
+    createReadStream(existsSync(join(root, "404.html")) ? join(root, "404.html") : join(publicRoot, "404.html")).pipe(response);
     return;
   }
   response.writeHead(200, { "Content-Type": `${types[extname(file)] ?? "application/octet-stream"}; charset=utf-8`, "Cache-Control": "no-cache" });

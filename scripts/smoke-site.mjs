@@ -29,6 +29,8 @@ for (const product of ["STEMGROW PLUS", "N-CURE", "BLOOMIX", "GROWFLOW", "TRIDOF
 assert.ok(!root.innerHTML.includes("Agriculture Insights"), "Template filler should not render");
 assert.ok(!root.innerHTML.includes(">07<"), "Unsupported hero statistic should not render");
 assert.ok(root.innerHTML.includes("application/ld+json") === false, "Schema belongs in the document head, not runtime markup");
+assert.ok(root.innerHTML.includes("approach-card__watermark"), "Approach cards should render the visual index treatment");
+assert.ok(root.innerHTML.includes("whatsapp-float") && root.innerHTML.includes("whatsapp-icon"), "WhatsApp action should be clearly branded");
 
 const languageButton = { dataset: { lang: "te" }, closest() { return this; } };
 listeners.get("click")({ target: languageButton });
