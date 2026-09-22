@@ -87,10 +87,35 @@ function logo(light = false) {
     <span class="logo__copy"><strong>STEMGROW</strong><small>AGRI SOLUTIONS</small></span></a>`;
 }
 
-function arrow() { return `<span class="arrow" aria-hidden="true">→</span>`; }
+function arrow() { return `<svg class="arrow" viewBox="0 0 18 18" aria-hidden="true" focusable="false"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>`; }
 
 function whatsappIcon() {
-  return `<svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 2.25a9.72 9.72 0 0 0-8.3 14.78L2.35 21.7l4.78-1.25A9.75 9.75 0 1 0 12 2.25Zm0 17.72a7.95 7.95 0 0 1-4.05-1.1l-.29-.17-2.84.74.76-2.76-.19-.3A7.96 7.96 0 1 1 12 19.97Z"/><path fill="var(--whatsapp-icon-phone, #25d366)" d="M16.63 14.79c-.25-.13-1.5-.74-1.73-.82-.23-.08-.4-.13-.57.13-.17.25-.65.82-.8.99-.15.17-.3.19-.55.06a6.37 6.37 0 0 1-1.86-1.15 6.94 6.94 0 0 1-1.28-1.6c-.13-.25-.01-.39.1-.51.1-.1.25-.27.37-.4.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.12-.57-1.36-.78-1.87-.2-.49-.41-.42-.57-.43h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.23.9 2.43 1.02 2.6.13.17 1.77 2.7 4.29 3.79.6.26 1.06.41 1.43.52.6.19 1.15.16 1.58.1.48-.07 1.5-.61 1.71-1.2.21-.59.21-1.09.15-1.2-.06-.1-.23-.17-.48-.3Z"/></svg>`;
+  return `<svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.149-.198.297-.767.967-.94 1.164-.173.198-.347.223-.644.074-.297-.148-1.255-.463-2.39-1.478-.883-.787-1.479-1.76-1.653-2.057-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.496.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.57-.01-.198 0-.52.074-.792.372-.273.297-1.04 1.016-1.04 2.479s1.065 2.876 1.214 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.123-.272-.198-.57-.347m-5.421 7.403h-.004a9.867 9.867 0 0 1-5.032-1.378l-.361-.214-3.741.981.998-3.648-.235-.375a9.87 9.87 0 1 1 8.375 4.634Z"/></svg>`;
+}
+
+function lineIcon(name) {
+  const icons = {
+    root: `<path d="M12 21V10M12 11C8 11 5 9 5 5c4 0 7 2 7 6Zm0 0c0-4 3-6 7-6 0 4-3 6-7 6Zm0 9-3-3m3 3 3-3m-3-1-4-2m4 2 4-2"/>`,
+    nutrient: `<path d="M12 3s-4 4.45-4 7.4a4 4 0 0 0 8 0C16 7.45 12 3 12 3Z"/><path d="M5 18h14M7 21h10"/>`,
+    growth: `<path d="m4 17 5-5 3 3 7-8M15 7h4v4"/>`,
+    flower: `<circle cx="12" cy="12" r="2.1"/><path d="M12 4.1c2.25 0 3.9 1.6 3.3 4.2 2.6-.6 4.2 1.05 4.2 3.3s-1.6 3.9-4.2 3.3c.6 2.6-1.05 4.2-3.3 4.2s-3.9-1.6-3.3-4.2c-2.6.6-4.2-1.05-4.2-3.3s1.6-3.9 4.2-3.3C8.1 5.7 9.75 4.1 12 4.1Z"/>`,
+    shield: `<path d="M12 3.2 19 6v5.1c0 4.4-2.9 7.7-7 9.7-4.1-2-7-5.3-7-9.7V6l7-2.8Z"/><path d="m8.6 12 2.1 2.1 4.8-4.8"/>`,
+    layers: `<path d="m12 4 8 4-8 4-8-4 8-4Zm-8 8 8 4 8-4M4 16l8 4 8-4"/>`,
+    fruit: `<path d="M12 7c-3.8 0-6.5 2.6-6.5 6.2 0 3.9 2.8 6.7 6.5 6.7s6.5-2.8 6.5-6.7C18.5 9.6 15.8 7 12 7Z"/><path d="M12 7c0-2.2 1.4-3.5 3.7-3.8M12.4 5.8C10 3.3 7.3 3.7 6 5.2c2.3 1.4 4.4 1.1 6.4.6Z"/>`,
+    check: `<path d="m5 12 4.1 4L19 6.8"/>`,
+    phone: `<path d="M7.2 4.5 5.5 6.2c-.9.9-.7 3.3 1.1 6.3 1.8 3 4.2 4.8 5.6 5.4 1.4.6 3.6.8 4.5-.1l1.7-1.7-3.1-2.4-1.5 1.1c-1.1-.5-2.6-1.8-3.4-3l1-1.6-2.2-3.2Z"/>`,
+    mail: `<rect x="3.5" y="5.5" width="17" height="13" rx="1.7"/><path d="m4.5 7 7.5 5.6L19.5 7"/>`
+  };
+  return `<svg class="line-icon line-icon--${name}" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">${icons[name] ?? icons.growth}</svg>`;
+}
+
+function replaceDecorativeSymbols(markup) {
+  const icons = {
+    "↗": lineIcon("growth"), "◌": lineIcon("nutrient"), "⌁": lineIcon("growth"), "✦": lineIcon("flower"),
+    "◒": lineIcon("shield"), "⊞": lineIcon("layers"), "⌇": lineIcon("root"), "●": lineIcon("fruit"),
+    "✓": lineIcon("check"), "◉": lineIcon("phone"), "⌕": lineIcon("phone"), "✉": lineIcon("mail")
+  };
+  return markup.replace(/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/gu, (symbol) => icons[symbol] ?? symbol);
 }
 
 function languageSwitcher(compact = false) {
@@ -140,7 +165,7 @@ function render() {
   document.documentElement.lang = locale === "en" ? "en" : "te";
   const shownProducts = filter === "all" ? products : products.filter((product) => product.category === filter);
   root.className = `app ${locale === "te" ? "app--telugu" : ""}`;
-  root.innerHTML = `
+  root.innerHTML = replaceDecorativeSymbols(`
     <header class="site-header" id="site-header"><div class="container header-inner">
       ${logo()}<nav class="desktop-nav" aria-label="Primary navigation">${nav.map(([id, label]) => `<button type="button" data-scroll="${id}">${pick(label)}</button>`).join("")}<button type="button" class="mobile-nav-cta" data-scroll="contact">${pick(ui.talk)}${arrow()}</button></nav>
       <div class="header-actions">${languageSwitcher(true)}<button type="button" class="button button--gold header-contact" data-scroll="contact">${pick(ui.contact)}${arrow()}</button><button class="menu-toggle" type="button" data-menu aria-label="${pick(ui.menu)}" aria-expanded="false"><span></span><span></span><span></span></button></div>
@@ -182,7 +207,7 @@ function render() {
 
     <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand">${logo(true)}<p>${pick(ui.footerCopy)}</p>${languageSwitcher()}</div><div><h3>${pick(ui.footerNav)}</h3><ul>${nav.map(([id, label]) => `<li><button type="button" data-scroll="${id}">${pick(label)}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerProducts)}</h3><ul>${products.map((product) => `<li><button type="button" data-product="${product.id}">${product.name}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerContact)}</h3><address>${locale === "en" ? "H. No. 2-84/3/237/EP, Ground Floor, Chengicherla, Peerzadiguda, Hyderabad, Telangana, India, 500039" : "హెచ్. నెం. 2-84/3/237/EP, గ్రౌండ్ ఫ్లోర్, చెంగిచెర్ల, పీర్జాదిగూడ, హైదరాబాద్, తెలంగాణ, భారతదేశం, 500039"}</address><a href="tel:+919133243325">9133243325</a><a href="mailto:stemgrowagrisolutions@gmail.com">stemgrowagrisolutions@gmail.com</a></div></div><div class="container footer-bottom"><span>${pick(ui.copyright)}</span><span>${pick(ui.policy)}</span></div></footer>
     <a class="whatsapp-float" href="https://wa.me/919133243325" target="_blank" rel="noreferrer" aria-label="${locale === "en" ? "Chat with Stemgrow on WhatsApp" : "వాట్సాప్‌లో స్టెమ్‌గ్రోతో మాట్లాడండి"}">${whatsappIcon()}<span>WhatsApp</span></a>
-    ${productModal()}`;
+    ${productModal()}`);
   document.body.style.overflow = selectedProduct ? "hidden" : "";
   setHeaderState();
 }

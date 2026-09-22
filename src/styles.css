@@ -679,7 +679,6 @@ body { font-size: 16px; }
 
 .whatsapp-icon { display: block; flex: 0 0 auto; width: 20px; height: 20px; }
 .quick-action--whatsapp {
-  --whatsapp-icon-phone: #29b95f;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -691,7 +690,6 @@ body { font-size: 16px; }
 }
 .quick-action--whatsapp .whatsapp-icon { width: 21px; height: 21px; }
 .modal-whatsapp {
-  --whatsapp-icon-phone: #fff;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -705,7 +703,6 @@ body { font-size: 16px; }
 .modal-whatsapp:hover { color: #0c7139; background: #e6f7e8; }
 .modal-whatsapp .whatsapp-icon { width: 17px; height: 17px; }
 .whatsapp-float {
-  --whatsapp-icon-phone: #25a85c;
   right: 22px;
   bottom: 22px;
   gap: 10px;
@@ -740,4 +737,41 @@ body { font-size: 16px; }
   .whatsapp-float span { display: inline; }
   .whatsapp-float .whatsapp-icon { width: 23px; height: 23px; }
   .quick-action--whatsapp .whatsapp-icon { width: 19px; height: 19px; }
+}
+
+/* Replace platform-dependent glyphs with one consistent vector icon system. */
+.arrow {
+  width: 1.15em;
+  height: 1.15em;
+  margin-left: 1px;
+  vertical-align: -.18em;
+}
+.line-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+}
+.chip-list span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chip-list .line-icon { width: 14px; height: 14px; stroke-width: 2.2; }
+.approach-card__icon .line-icon { width: 21px; height: 21px; }
+.need-card__icon .line-icon { width: 19px; height: 19px; }
+.contact-links > a > span { display: inline-flex; align-items: center; }
+.contact-links .line-icon { width: 16px; height: 16px; }
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+.quick-action .line-icon { width: 19px; height: 19px; }
+
+@media (max-width: 560px) {
+  .chip-list .line-icon { width: 13px; height: 13px; }
+  .quick-action .line-icon { width: 17px; height: 17px; }
 }

@@ -31,6 +31,7 @@ assert.ok(!root.innerHTML.includes(">07<"), "Unsupported hero statistic should n
 assert.ok(root.innerHTML.includes("application/ld+json") === false, "Schema belongs in the document head, not runtime markup");
 assert.ok(root.innerHTML.includes("approach-card__watermark"), "Approach cards should render the visual index treatment");
 assert.ok(root.innerHTML.includes("whatsapp-float") && root.innerHTML.includes("whatsapp-icon"), "WhatsApp action should be clearly branded");
+assert.ok(!/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/u.test(root.innerHTML), "Decorative emoji-style glyphs should not render in the UI");
 
 const languageButton = { dataset: { lang: "te" }, closest() { return this; } };
 listeners.get("click")({ target: languageButton });
