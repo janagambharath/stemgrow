@@ -1,4 +1,4 @@
-import { existsSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
@@ -8,4 +8,8 @@ for (const file of [...required, ...productImages.map((image) => `products/sourc
   const full = resolve(root, file);
   if (!existsSync(full) || statSync(full).size === 0) throw new Error(`Missing required asset: ${file}`);
 }
-console.log("Static site verification passed: core files and 7 verified product package images are present.");
+const stylesheet = readFileSync(resolve(root, "src/styles.css"), "utf8");
+for (const token of ["heroLineSlide", "10398726", "20234940", "20344345", "39002374", "12470180"]) {
+  if (!stylesheet.includes(token)) throw new Error(`Missing verified hero or crop visual treatment: ${token}`);
+}
+console.log("Static site verification passed: core files, crop treatments, and 7 verified product package images are present.");
