@@ -833,10 +833,14 @@ body { font-size: 16px; }
 
 /* A dedicated mobile crop composition keeps the hero visual, readable and intentional. */
 @media (max-width: 560px) {
-  .hero { min-height: 735px; }
-  .hero__content { padding-top: 116px; padding-bottom: 188px; }
+  .hero { min-height: 680px; }
+  .hero__content { padding-top: 100px; padding-bottom: 104px; }
   .hero h1 { max-width: 100%; font-size: clamp(2.45rem, 11.5vw, 3rem); }
   .app--telugu .hero h1 { font-size: clamp(2.1rem, 10.5vw, 2.8rem); }
+  .hero__line { padding-bottom: .035em; }
+  .hero__copy { margin: 13px 0 16px; line-height: 1.62; }
+  .hero .text-link--light { margin-top: 17px; }
+  .hero-scroll { margin-top: 16px; }
   .hero__slide { inset: 0; }
   .hero__slide--cotton { background-image: url("https://images.pexels.com/photos/20344345/pexels-photo-20344345.jpeg?auto=compress&cs=tinysrgb&w=1400"); background-position: 63% center; }
   .hero__slide--maize { background-position: 64% center; }
@@ -845,7 +849,7 @@ body { font-size: 16px; }
 }
 
 @media (max-width: 390px) {
-  .hero { min-height: 715px; }
-  .hero__content { padding-top: 108px; }
+  .hero { min-height: 660px; }
+  .hero__content { padding-top: 92px; }
   .hero__copy { max-width: 31rem; }
 }
