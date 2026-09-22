@@ -32,7 +32,12 @@ const ui = {
   namePlaceholder: b("Your name", "మీ పేరు"), emailPlaceholder: b("name@example.com", "మీ ఇమెయిల్"), cropPlaceholder: b("Crop or requirement", "పంట లేదా అవసరం"), messagePlaceholder: b("Tell us how we can help", "మీ అవసరం గురించి మాకు తెలియజేయండి"),
   formError: b("Please complete every field and enter a valid 10-digit mobile number and email address.", "దయచేసి అన్ని వివరాలను నమోదు చేసి, సరైన 10 అంకెల మొబైల్ నంబర్ మరియు ఇమెయిల్ చిరునామాను ఇవ్వండి."), formSuccess: b("Thank you. Your enquiry is ready in your email app — please send it to contact our team.", "ధన్యవాదాలు. మీ విచారణ ఇమెయిల్ యాప్‌లో సిద్ధంగా ఉంది — మా బృందాన్ని సంప్రదించడానికి దయచేసి పంపండి."),
   footerCopy: b("Practical agricultural solutions for crop nutrition, plant growth and biological crop protection.", "పంట పోషణ, మొక్కల పెరుగుదల మరియు జీవ ఆధారిత పంట రక్షణకు ఆచరణాత్మక వ్యవసాయ పరిష్కారాలు."), footerNav: b("Navigate", "నావిగేషన్"), footerProducts: b("Products", "ఉత్పత్తులు"), footerContact: b("Contact", "సంప్రదించండి"), copyright: b("© 2026 STEMGROW AGRI SOLUTIONS PRIVATE LIMITED. All rights reserved.", "© 2026 స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్ ప్రైవేట్ లిమిటెడ్. అన్ని హక్కులూ ప్రత్యేకించబడినవి."),
-  policy: b("Use according to product label and recommended application practices.", "ఉత్పత్తి లేబుల్ మరియు సిఫార్సు చేసిన వినియోగ పద్ధతుల ప్రకారం ఉపయోగించండి."), view: b("View details", "వివరాలు చూడండి"), viewProducts: b("View products", "ఉత్పత్తులు చూడండి"), benefits: b("Benefits", "ప్రయోజనాలు"), composition: b("Composition / formulation", "కూర్పు / ఫార్ములేషన్"), application: b("Application", "వినియోగం"), dosage: b("Dosage", "మోతాదు"), method: b("Application method", "వినియోగ పద్ధతి"), enquiry: b("Enquire About This Product", "ఈ ఉత్పత్తి గురించి విచారించండి"), close: b("Close product details", "ఉత్పత్తి వివరాలను మూసివేయండి"), backProducts: b("Back to products", "ఉత్పత్తులకు తిరిగి వెళ్ళండి"), menu: b("Toggle menu", "మెనూ తెరవండి"), noProducts: b("No products found in this category.", "ఈ వర్గంలో ఉత్పత్తులు లేవు.")
+  policy: b("Use according to product label and recommended application practices.", "ఉత్పత్తి లేబుల్ మరియు సిఫార్సు చేసిన వినియోగ పద్ధతుల ప్రకారం ఉపయోగించండి."), view: b("View details", "వివరాలు చూడండి"), viewProducts: b("View products", "ఉత్పత్తులు చూడండి"), benefits: b("Benefits", "ప్రయోజనాలు"), composition: b("Composition / formulation", "కూర్పు / ఫార్ములేషన్"), application: b("Application", "వినియోగం"), dosage: b("Dosage", "మోతాదు"), method: b("Application method", "వినియోగ పద్ధతి"), enquiry: b("Enquire About This Product", "ఈ ఉత్పత్తి గురించి విచారించండి"), close: b("Close product details", "ఉత్పత్తి వివరాలను మూసివేయండి"), backProducts: b("Back to products", "ఉత్పత్తులకు తిరిగి వెళ్ళండి"), menu: b("Toggle menu", "మెనూ తెరవండి"), noProducts: b("No products found in this category.", "ఈ వర్గంలో ఉత్పత్తులు లేవు."),
+  ticker1: b("Balanced Crop Nutrition & Soil Health", "సమతుల్య పంట పోషణ & నేల ఆరోగ్యం"),
+  ticker2: b("Practical Agricultural Solutions Across Telangana", "రైతుల కోసం ఆచరణాత్మక వ్యవసాయ పరిష్కారాలు"),
+  ticker3: b("Mycorrhizal Biofertilizers & Chelated Micronutrients", "మైకోరైజల్ ఎరువులు & సూక్ష్మ పోషకాలు"),
+  ticker4: b("Biological Pest Protection & Integrated Crop Management", "సమగ్ర సస్యరక్షణ & జీవ ఆధారిత రక్షణ"),
+  ticker5: b("Supporting Vigorous Plant Growth & Higher Crop Yields", "ఆరోగ్యకరమైన పంట పెరుగుదల & అధిక దిగుబడులు")
 };
 
 const categoryLabels = {
@@ -119,6 +124,21 @@ function replaceDecorativeSymbols(markup) {
   return markup.replace(/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/gu, (symbol) => icons[symbol] ?? symbol);
 }
 
+function heroTicker() {
+  const items = [ui.ticker1, ui.ticker2, ui.ticker3, ui.ticker4, ui.ticker5].map((text) => `
+    <span class="hero-ticker__item">
+      <svg class="hero-ticker__spin" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-dasharray="3 3"/><path d="M12 7v5l3 3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span>${pick(text)}</span>
+    </span>
+  `).join("");
+  return `<div class="hero-ticker" aria-label="Key highlights">
+    <div class="hero-ticker__track">
+      <div class="hero-ticker__group">${items}</div>
+      <div class="hero-ticker__group" aria-hidden="true">${items}</div>
+    </div>
+  </div>`;
+}
+
 function languageSwitcher(compact = false) {
   return `<div class="language-switcher ${compact ? "language-switcher--compact" : ""}" role="group" aria-label="Choose website language">
     <button type="button" data-lang="en" class="${locale === "en" ? "is-active" : ""}" aria-pressed="${locale === "en"}">EN</button>
@@ -173,7 +193,7 @@ function render() {
     </div></header>
 
     <main>
-      <section class="hero" id="home"><div class="hero__media" role="img" aria-label="${pick(ui.heroScene)}"><span class="hero__slide hero__slide--cotton is-active" aria-hidden="true"></span><span class="hero__slide hero__slide--maize" aria-hidden="true"></span><span class="hero__slide hero__slide--mirchi" aria-hidden="true"></span></div><div class="hero__overlay"></div>
+      <section class="hero" id="home"><div class="hero__media" role="img" aria-label="${pick(ui.heroScene)}"><span class="hero__slide hero__slide--cotton is-active" aria-hidden="true"></span><span class="hero__slide hero__slide--maize" aria-hidden="true"></span><span class="hero__slide hero__slide--mirchi" aria-hidden="true"></span></div><div class="hero__overlay"></div>${heroTicker()}
         <div class="container hero__content"><p class="eyebrow eyebrow--light">${pick(ui.heroLabel)}</p><h1 aria-label="${pick(ui.heroLead)} ${pick(ui.heroTail)}"><span class="hero__line"><span>${pick(ui.heroLead)}</span></span><span class="hero__line hero__gold"><span>${pick(ui.heroTail)}</span></span></h1><p class="hero__copy">${pick(ui.heroCopy)}</p>
           <div class="hero__actions"><button class="button button--gold" type="button" data-scroll="products">${pick(ui.explore)}${arrow()}</button><button class="button button--ghost" type="button" data-scroll="contact">${pick(ui.talk)}</button></div>
           <button class="text-link text-link--light" type="button" data-scroll="solutions">${pick(ui.viewSolutions)}${arrow()}</button>
