@@ -10,7 +10,7 @@ function safeFile(pathname) {
   const cleaned = normalize(decodeURIComponent(pathname)).replace(/^([/\\])+/, "");
   // Keep product files at the site root for Render Static Sites, while also
   // accepting the legacy public/ location during local development.
-  const bases = pathname.startsWith("/products/") || ["/favicon.svg", "/og-stemgrow.svg", "/robots.txt", "/sitemap.xml"].includes(pathname)
+  const bases = pathname.startsWith("/products/") || pathname.startsWith("/crops/") || ["/favicon.svg", "/og-stemgrow.svg", "/robots.txt", "/sitemap.xml"].includes(pathname)
     ? [root, publicRoot]
     : [root];
   for (const base of bases) {
