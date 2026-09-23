@@ -34,7 +34,7 @@ assert.ok(root.innerHTML.includes("whatsapp-float") && root.innerHTML.includes("
 assert.ok(root.innerHTML.includes("hero__line") && root.innerHTML.includes("hero__slide--cotton") && root.innerHTML.includes("hero__slide--maize") && root.innerHTML.includes("hero__slide--mirchi"), "Hero should render the cotton, maize and mirchi slideshow");
 assert.ok(root.innerHTML.includes("expertise-showcase") && root.innerHTML.includes("Our Expertise - Synthetic Biology Platform"), "Hero should feature the scientific expertise slideshow");
 assert.ok(root.innerHTML.includes("/crops/synbio-platform.jpeg") && root.innerHTML.includes("/crops/microbiome-platform.jpeg"), "Expertise slideshow should render scientific platform banners");
-assert.ok(root.innerHTML.includes("/products/supplied-packshots/stemgrow-plus.jpeg") && root.innerHTML.includes("/products/supplied-packshots/reflector.jpeg"), "Catalogue should use the supplied product packshots");
+assert.ok(root.innerHTML.includes("/products/cutouts/stemgrow-plus.png") && root.innerHTML.includes("/products/cutouts/reflector.png"), "Catalogue should use the transparent product packshots");
 assert.ok(root.innerHTML.includes("wa.me/917981312887") && !root.innerHTML.includes("wa.me/919133243325"), "Every WhatsApp action should use the approved 7981312887 number");
 assert.ok(!/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/u.test(root.innerHTML), "Decorative emoji-style glyphs should not render in the UI");
 
