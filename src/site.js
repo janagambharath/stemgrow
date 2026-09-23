@@ -37,7 +37,13 @@ const ui = {
   ticker2: b("Practical Agricultural Solutions Across Telangana", "రైతుల కోసం ఆచరణాత్మక వ్యవసాయ పరిష్కారాలు"),
   ticker3: b("Mycorrhizal Biofertilizers & Chelated Micronutrients", "మైకోరైజల్ ఎరువులు & సూక్ష్మ పోషకాలు"),
   ticker4: b("Biological Pest Protection & Integrated Crop Management", "సమగ్ర సస్యరక్షణ & జీవ ఆధారిత రక్షణ"),
-  ticker5: b("Supporting Vigorous Plant Growth & Higher Crop Yields", "ఆరోగ్యకరమైన పంట పెరుగుదల & అధిక దిగుబడులు")
+  ticker5: b("Supporting Vigorous Plant Growth & Higher Crop Yields", "ఆరోగ్యకరమైన పంట పెరుగుదల & అధిక దిగుబడులు"),
+  expertiseEyebrow: b("SCIENTIFIC PLATFORMS", "శాస్త్రీయ ప్లాట్‌ఫారమ్‌లు"),
+  expertiseTitle: b("Our Scientific & Biological Expertise", "మా శాస్త్రీయ & జీవ నైపుణ్యం"),
+  expertiseAria: b("Scientific and biological expertise slideshow", "శాస్త్రీయ మరియు జీవ నైపుణ్యం స్లైడ్‌షో"),
+  viewExpertise: b("View Scientific Platforms", "శాస్త్రీయ ప్లాట్‌ఫారమ్‌లు చూడండి"),
+  prevSlide: b("Previous slide", "మునుపటి స్లైడ్"),
+  nextSlide: b("Next slide", "తరువాతి స్లైడ్")
 };
 
 const categoryLabels = {
@@ -84,7 +90,7 @@ const needs = [
 const why = [["01", b("Practical Solutions", "ఆచరణాత్మక పరిష్కారాలు"), b("Solutions designed around crop requirements.", "పంట అవసరాలను దృష్టిలో పెట్టుకుని రూపొందించిన పరిష్కారాలు.")], ["02", b("Balanced Approach", "సమతుల్య విధానం"), b("Nutrition, plant growth and crop protection considered together.", "పోషణ, మొక్కల పెరుగుదల, పంట రక్షణను సమగ్రంగా పరిగణిస్తాము.")], ["03", b("Modern Agriculture", "ఆధునిక వ్యవసాయం"), b("Compatible with modern crop-management practices.", "ఆధునిక పంట నిర్వహణ పద్ధతులకు అనుకూలమైన పరిష్కారాలు.")], ["04", b("Farmer Focused", "రైతు కేంద్రిత"), b("Designed around practical agricultural requirements.", "ఆచరణాత్మక వ్యవసాయ అవసరాల ఆధారంగా రూపొందించబడింది.")]];
 const insights = [["01", b("Crop Nutrition", "పంట పోషణ"), b("A future home for practical crop-nutrition guidance.", "పంట పోషణపై ఆచరణాత్మక మార్గదర్శకానికి భవిష్యత్తు వేదిక.")], ["02", b("Plant Growth", "మొక్కల పెరుగుదల"), b("Resources can be added as crop-stage guidance develops.", "పంట దశల మార్గదర్శకం అభివృద్ధి చెందుతున్న కొద్దీ వనరులను జోడించవచ్చు.")], ["03", b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ"), b("A space for responsible crop-protection knowledge.", "బాధ్యతాయుత పంట రక్షణ జ్ఞానానికి ఒక వేదిక.")], ["04", b("Integrated Pest Management", "సమగ్ర కీటక నిర్వహణ"), b("Future articles can be structured here.", "భవిష్యత్ వ్యాసాలను ఇక్కడ క్రమబద్ధీకరించవచ్చు.")]];
 
-const nav = [["home", ui.navHome], ["about", ui.navAbout], ["solutions", ui.navSolutions], ["products", ui.navProducts], ["approach", ui.navApproach], ["contact", ui.navContact]];
+const nav = [["home", ui.navHome], ["expertise", b("Expertise", "నైపుణ్యం")], ["about", ui.navAbout], ["solutions", ui.navSolutions], ["products", ui.navProducts], ["approach", ui.navApproach], ["contact", ui.navContact]];
 const filters = [["all", b("All Products", "అన్ని ఉత్పత్తులు")], ["nutrition", b("Crop Nutrition", "పంట పోషణ")], ["growth", b("Plant Growth", "మొక్కల పెరుగుదల")], ["biological", b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ")], ["protection", b("Plant Protection", "మొక్కల రక్షణ")]];
 
 function logo(light = false) {
@@ -182,6 +188,80 @@ function productModal() {
   </div>`;
 }
 
+const expertiseSlides = [
+  {
+    id: "synbio",
+    tag: b("Synthetic Biology Platform", "సింథటిక్ బయాలజీ ప్లాట్‌ఫారమ్"),
+    title: b("Our Expertise - Synthetic Biology Platform", "మా నైపుణ్యం - సింథటిక్ బయాలజీ ప్లాట్‌ఫారమ్"),
+    subtitle: b("Innovating Sustainability in Agriculture, Aquaculture and Animal health", "వ్యవసాయం, ఆక్వాకల్చర్ మరియు పశుసంరక్షణలో సుస్థిరత కోసం ఆవిష్కరణలు"),
+    image: "/crops/synbio-platform.jpeg",
+    alt: "Synthetic Biology Platform - Microscopic biological cell structures"
+  },
+  {
+    id: "microbiome",
+    tag: b("Bio-Nutrition & Soil Health", "బయో-న్యూట్రిషన్ & నేల ఆరోగ్యం"),
+    title: b("Microbiome & Bio-Nutrition Platforms", "మైక్రోబయోమ్ & బయో-న్యూట్రిషన్ ప్లాట్‌ఫారమ్‌లు"),
+    subtitle: b("Advanced Mycorrhizal & Biofertilizer Solutions for Soil Vitality and Root Health", "నేల సారం, బలమైన వేర్ల పెరుగుదల కోసం ఆధునిక మైకోరైజల్ & జీవ ఎరువుల పరిష్కారాలు"),
+    image: "/crops/microbiome-platform.jpeg",
+    alt: "Microbiome & Bio-Nutrition - Mycorrhizal fungal network colonizing plant roots"
+  },
+  {
+    id: "bioprotect",
+    tag: b("Biological Pest Protection", "జీవ ఆధారిత పంట రక్షణ"),
+    title: b("Biological Crop Protection & IPM Platforms", "జీవ ఆధారిత పంట రక్షణ & IPM ప్లాట్‌ఫారమ్‌లు"),
+    subtitle: b("Targeted Entomopathogenic Formulations for Eco-Friendly Pest Management", "పర్యావరణ హితమైన సమగ్ర సస్యరక్షణ కోసం లక్ష్యిత జీవ శిలీంధ్ర ఫార్ములేషన్లు"),
+    image: "/crops/bioprotect-platform.jpeg",
+    alt: "Biological Crop Protection - Entomopathogenic fungal biocontrol spores"
+  },
+  {
+    id: "plantbio",
+    tag: b("Plant Physiology & Resilience", "మొక్కల శరీరధర్మం & ఒత్తిడి నిరోధకత"),
+    title: b("Plant Physiology & Stress Resilience Platforms", "మొక్కల శరీరధర్మం & ఒత్తిడి నిరోధక ప్లాట్‌ఫారమ్‌లు"),
+    subtitle: b("Enhancing Flowering, Fruit Development and Climate Resilience Across Crops", "పంటల్లో అధిక పుష్పించడం, నాణ్యమైన దిగుబడి మరియు వాతావరణ ఒత్తిడిని తట్టుకునే శక్తి"),
+    image: "/crops/plantbio-platform.jpeg",
+    alt: "Plant Physiology & Stress Resilience - Fluorescent confocal microscopy of plant cellular stomata"
+  }
+];
+
+function expertiseSection() {
+  return `<section class="expertise-showcase" id="expertise" aria-label="${pick(ui.expertiseAria)}">
+    <div class="container">
+      <div class="expertise-showcase__header">
+        <p class="eyebrow">${pick(ui.expertiseEyebrow)}</p>
+        <h2>${pick(ui.expertiseTitle)}</h2>
+      </div>
+      <div class="expertise-slider" data-expertise-slider>
+        <div class="expertise-slides-wrapper">
+          ${expertiseSlides.map((slide, index) => `
+            <article class="expertise-slide ${index === 0 ? "is-active" : ""}" data-slide-id="${slide.id}">
+              <div class="expertise-slide__bg" style="background-image: url('${slide.image}')" role="img" aria-label="${slide.alt}"></div>
+              <div class="expertise-slide__overlay"></div>
+              <div class="expertise-slide__content">
+                <span class="expertise-slide__tag">${pick(slide.tag)}</span>
+                <h2 class="expertise-slide__title">${pick(slide.title)}</h2>
+                <p class="expertise-slide__subtitle">${pick(slide.subtitle)}</p>
+              </div>
+            </article>
+          `).join("")}
+        </div>
+        <div class="expertise-controls">
+          <button class="expertise-nav expertise-nav--prev" type="button" data-expertise-prev aria-label="${pick(ui.prevSlide)}">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="expertise-dots" role="tablist" aria-label="${pick(ui.expertiseAria)}">
+            ${expertiseSlides.map((slide, index) => `
+              <button class="expertise-dot ${index === 0 ? "is-active" : ""}" type="button" data-expertise-goto="${index}" role="tab" aria-selected="${index === 0}" aria-label="${pick(slide.title)}"></button>
+            `).join("")}
+          </div>
+          <button class="expertise-nav expertise-nav--next" type="button" data-expertise-next aria-label="${pick(ui.nextSlide)}">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
+
 function render() {
   document.documentElement.lang = locale === "en" ? "en" : "te";
   const shownProducts = filter === "all" ? products : products.filter((product) => product.category === filter);
@@ -196,9 +276,11 @@ function render() {
       <section class="hero" id="home"><div class="hero__media" role="img" aria-label="${pick(ui.heroScene)}"><span class="hero__slide hero__slide--cotton is-active" aria-hidden="true"></span><span class="hero__slide hero__slide--maize" aria-hidden="true"></span><span class="hero__slide hero__slide--mirchi" aria-hidden="true"></span></div><div class="hero__overlay"></div>${heroTicker()}
         <div class="container hero__content"><p class="eyebrow eyebrow--light">${pick(ui.heroLabel)}</p><h1 aria-label="${pick(ui.heroLead)} ${pick(ui.heroTail)}"><span class="hero__line"><span>${pick(ui.heroLead)}</span></span><span class="hero__line hero__gold"><span>${pick(ui.heroTail)}</span></span></h1><p class="hero__copy">${pick(ui.heroCopy)}</p>
           <div class="hero__actions"><button class="button button--gold" type="button" data-scroll="products">${pick(ui.explore)}${arrow()}</button><button class="button button--ghost" type="button" data-scroll="contact">${pick(ui.talk)}</button></div>
-          <button class="text-link text-link--light" type="button" data-scroll="solutions">${pick(ui.viewSolutions)}${arrow()}</button>
+          <div style="display:flex;gap:18px;flex-wrap:wrap"><button class="text-link text-link--light" type="button" data-scroll="expertise">${pick(ui.viewExpertise)}${arrow()}</button><button class="text-link text-link--light" type="button" data-scroll="solutions">${pick(ui.viewSolutions)}${arrow()}</button></div>
         </div><div class="hero__leaf" aria-hidden="true"></div>
       </section>
+
+      ${expertiseSection()}
 
       <section class="section about" id="about"><div class="container about-grid"><div class="about-visual reveal"><div class="about-visual__photo" role="img" aria-label="${locale === "en" ? "Close view of crops growing in a field" : "పొలంలో పెరుగుతున్న పంటల సమీప దృశ్యం"}"></div><div class="about-visual__card"><span>STEMGROW</span><strong>${locale === "en" ? "For crop needs, field by field." : "పంట అవసరాలకు, పొలం పొలంగా."}</strong></div><span class="about-visual__accent"></span></div>
         <div class="about-copy reveal">${heading(ui.aboutEyebrow, ui.aboutTitle)}<p>${pick(ui.about1)}</p><p>${pick(ui.about2)}</p><div class="chip-list">${[b("Healthy Crop Development", "ఆరోగ్యకరమైన పంట అభివృద్ధి"), b("Efficient Nutrient Utilization", "సమర్థవంతమైన పోషక వినియోగం"), b("Plant Growth Support", "మొక్కల పెరుగుదలకు మద్దతు"), b("Integrated Crop Management", "సమగ్ర పంట నిర్వహణ")].map((chip) => `<span>✓ ${pick(chip)}</span>`).join("")}</div><button class="text-link" type="button" data-scroll="approach">${pick(ui.discover)}${arrow()}</button></div>
@@ -230,7 +312,37 @@ function render() {
     ${productModal()}`);
   document.body.style.overflow = selectedProduct ? "hidden" : "";
   startHeroSlideshow();
+  startExpertiseSlideshow();
   setHeaderState();
+}
+
+let expertiseSlideTimer = null;
+let currentExpertiseIndex = 0;
+
+function setExpertiseSlide(nextIndex) {
+  if (typeof document.querySelectorAll !== "function") return;
+  const slides = Array.from(document.querySelectorAll(".expertise-slide"));
+  const dots = Array.from(document.querySelectorAll(".expertise-dot"));
+  if (!slides.length) return;
+  slides[currentExpertiseIndex]?.classList.remove("is-active");
+  dots[currentExpertiseIndex]?.classList.remove("is-active");
+  dots[currentExpertiseIndex]?.setAttribute("aria-selected", "false");
+  currentExpertiseIndex = (nextIndex + slides.length) % slides.length;
+  slides[currentExpertiseIndex]?.classList.add("is-active");
+  dots[currentExpertiseIndex]?.classList.add("is-active");
+  dots[currentExpertiseIndex]?.setAttribute("aria-selected", "true");
+}
+
+function startExpertiseSlideshow() {
+  if (expertiseSlideTimer !== null && typeof window.clearInterval === "function") window.clearInterval(expertiseSlideTimer);
+  expertiseSlideTimer = null;
+  if (typeof document.querySelectorAll !== "function" || typeof window.setInterval !== "function") return;
+  if (typeof window.matchMedia === "function" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const slides = Array.from(document.querySelectorAll(".expertise-slide"));
+  if (slides.length < 2) return;
+  expertiseSlideTimer = window.setInterval(() => {
+    setExpertiseSlide(currentExpertiseIndex + 1);
+  }, 5000);
 }
 
 function startHeroSlideshow() {
@@ -278,6 +390,21 @@ root.addEventListener("click", (event) => {
     return;
   }
   if (target.dataset.product) { selectedProduct = target.dataset.product; refresh(); return; }
+  if (target.dataset.expertisePrev !== undefined) {
+    setExpertiseSlide(currentExpertiseIndex - 1);
+    startExpertiseSlideshow();
+    return;
+  }
+  if (target.dataset.expertiseNext !== undefined) {
+    setExpertiseSlide(currentExpertiseIndex + 1);
+    startExpertiseSlideshow();
+    return;
+  }
+  if (target.dataset.expertiseGoto !== undefined) {
+    setExpertiseSlide(Number(target.dataset.expertiseGoto));
+    startExpertiseSlideshow();
+    return;
+  }
   if (target.dataset.menu !== undefined) { const navElement = document.querySelector(".desktop-nav"); const open = navElement.classList.toggle("is-open"); target.setAttribute("aria-expanded", String(open)); return; }
   if (target.dataset.scroll) { event.preventDefault(); document.querySelector(".desktop-nav")?.classList.remove("is-open"); document.querySelector("[data-menu]")?.setAttribute("aria-expanded", "false"); document.getElementById(target.dataset.scroll)?.scrollIntoView({ behavior: "smooth", block: "start" }); }
 });

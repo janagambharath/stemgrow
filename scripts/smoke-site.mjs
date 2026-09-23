@@ -32,6 +32,8 @@ assert.ok(root.innerHTML.includes("application/ld+json") === false, "Schema belo
 assert.ok(root.innerHTML.includes("approach-card__watermark"), "Approach cards should render the visual index treatment");
 assert.ok(root.innerHTML.includes("whatsapp-float") && root.innerHTML.includes("whatsapp-icon"), "WhatsApp action should be clearly branded");
 assert.ok(root.innerHTML.includes("hero__line") && root.innerHTML.includes("hero__slide--cotton") && root.innerHTML.includes("hero__slide--maize") && root.innerHTML.includes("hero__slide--mirchi"), "Hero should render the cotton, maize and mirchi slideshow");
+assert.ok(root.innerHTML.includes("expertise-showcase") && root.innerHTML.includes("Our Expertise - Synthetic Biology Platform"), "Hero should feature the scientific expertise slideshow");
+assert.ok(root.innerHTML.includes("/crops/synbio-platform.jpeg") && root.innerHTML.includes("/crops/microbiome-platform.jpeg"), "Expertise slideshow should render scientific platform banners");
 assert.ok(root.innerHTML.includes("/products/supplied-packshots/stemgrow-plus.jpeg") && root.innerHTML.includes("/products/supplied-packshots/reflector.jpeg"), "Catalogue should use the supplied product packshots");
 assert.ok(root.innerHTML.includes("wa.me/917981312887") && !root.innerHTML.includes("wa.me/919133243325"), "Every WhatsApp action should use the approved 7981312887 number");
 assert.ok(!/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/u.test(root.innerHTML), "Decorative emoji-style glyphs should not render in the UI");
@@ -48,5 +50,6 @@ listeners.get("click")({ target: languageButton });
 assert.equal(document.documentElement.lang, "te", "Language switch should update document language");
 assert.ok(root.innerHTML.includes("మెరుగైన పెరుగుదల"), "Telugu hero copy should render after switch");
 assert.ok(root.innerHTML.includes("విచారణ పంపండి"), "Telugu form CTA should render after switch");
+assert.ok(root.innerHTML.includes("మా నైపుణ్యం - సింథటిక్ బయాలజీ ప్లాట్‌ఫారమ్"), "Telugu expertise slide copy should render after switch");
 
 console.log("Client smoke test passed: seven products, no filler/stat, and English/Telugu render path verified.");
