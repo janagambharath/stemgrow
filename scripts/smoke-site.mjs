@@ -35,7 +35,7 @@ assert.ok(root.innerHTML.includes("hero__line") && root.innerHTML.includes("hero
 assert.ok(root.innerHTML.includes("expertise-showcase") && root.innerHTML.includes("Our Expertise - Synthetic Biology Platform"), "Hero should feature the scientific expertise slideshow");
 assert.ok(root.innerHTML.includes("/crops/synbio-platform.jpeg") && root.innerHTML.includes("/crops/microbiome-platform.jpeg"), "Expertise slideshow should render scientific platform banners");
 assert.ok(root.innerHTML.includes("/products/cutouts/stemgrow-plus.png") && root.innerHTML.includes("/products/cutouts/reflector.png"), "Catalogue should use the transparent product packshots");
-assert.ok(root.innerHTML.includes("wa.me/917981312887") && !root.innerHTML.includes("wa.me/919133243325"), "Every WhatsApp action should use the approved 7981312887 number");
+assert.ok(root.innerHTML.includes("wa.me/919133243325") && !root.innerHTML.includes("wa.me/917981312887"), "Every WhatsApp action should use the approved 9133243325 number");
 assert.ok(!/[↗◌⌁✦◒⊞⌇●✓◉⌕✉]/u.test(root.innerHTML), "Decorative emoji-style glyphs should not render in the UI");
 
 const productButton = { dataset: { product: "stemgrow-plus" }, closest() { return this; } };

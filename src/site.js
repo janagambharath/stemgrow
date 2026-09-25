@@ -11,7 +11,7 @@ const pick = (value) => typeof value === "string" ? value : value[locale];
 const esc = (value) => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[character]));
 
 const ui = {
-  navHome: b("Home", "హోమ్"), navAbout: b("About Us", "మా గురించి"), navSolutions: b("Solutions", "పరిష్కారాలు"), navProducts: b("Products", "ఉత్పత్తులు"), navApproach: b("Our Approach", "మా విధానం"), navTestimonials: b("Testimonials", "రైతుల అభిప్రాయాలు"), navContact: b("Contact", "సంప్రదించండి"),
+  navHome: b("Home", "హోమ్"), navAbout: b("About Us", "మా గురించి"), navSolutions: b("Solutions", "పరిష్కారాలు"), navProducts: b("Products", "ఉత్పత్తులు"), navApproach: b("Our Approach", "మా విధానం"), navTestimonials: b("Testimonials", "రైతుల అభిప్రాయాలు"), navContact: b("Contact", "సంప్రదించండి"), navArticles: b("Articles", "వ్యాసాలు"),
   contact: b("Contact Us", "సంప్రదించండి"), heroLabel: b("STEMGROW AGRI SOLUTIONS", "స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్"), heroLead: b("Growing Better.", "మెరుగైన పెరుగుదల."), heroTail: b("Farming Smarter.", "తెలివైన వ్యవసాయం."), heroScene: b("Cotton and maize fields", "పత్తి మరియు మొక్కజొన్న పొలాలు"), heroCotton: b("Cotton", "పత్తి"), heroMaize: b("Maize", "మొక్కజొన్న"),
   heroCopy: b("STEMGROW AGRI SOLUTIONS PRIVATE LIMITED provides practical agricultural solutions across crop nutrition, plant growth support and biological crop protection.", "స్టెమ్‌గ్రో అగ్రి సొల్యూషన్స్ ప్రైవేట్ లిమిటెడ్ పంట పోషణ, మొక్కల పెరుగుదల మరియు జీవ ఆధారిత పంట రక్షణకు ఆచరణాత్మక వ్యవసాయ పరిష్కారాలను అందిస్తుంది."),
   explore: b("Explore Products", "ఉత్పత్తులు చూడండి"), talk: b("Talk to Us", "మాతో మాట్లాడండి"), viewSolutions: b("View Our Solutions", "మా పరిష్కారాలు చూడండి"), productCount: b("Focused Product Solutions", "ఎంపిక చేసిన ఉత్పత్తి పరిష్కారాలు"), nutrition: b("Crop Nutrition", "పంట పోషణ"), growth: b("Plant Growth", "మొక్కల పెరుగుదల"), biological: b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ"),
@@ -90,7 +90,7 @@ const needs = [
 const why = [["01", b("Practical Solutions", "ఆచరణాత్మక పరిష్కారాలు"), b("Solutions designed around crop requirements.", "పంట అవసరాలను దృష్టిలో పెట్టుకుని రూపొందించిన పరిష్కారాలు.")], ["02", b("Balanced Approach", "సమతుల్య విధానం"), b("Nutrition, plant growth and crop protection considered together.", "పోషణ, మొక్కల పెరుగుదల, పంట రక్షణను సమగ్రంగా పరిగణిస్తాము.")], ["03", b("Modern Agriculture", "ఆధునిక వ్యవసాయం"), b("Compatible with modern crop-management practices.", "ఆధునిక పంట నిర్వహణ పద్ధతులకు అనుకూలమైన పరిష్కారాలు.")], ["04", b("Farmer Focused", "రైతు కేంద్రిత"), b("Designed around practical agricultural requirements.", "ఆచరణాత్మక వ్యవసాయ అవసరాల ఆధారంగా రూపొందించబడింది.")]];
 const insights = [["01", b("Crop Nutrition", "పంట పోషణ"), b("A future home for practical crop-nutrition guidance.", "పంట పోషణపై ఆచరణాత్మక మార్గదర్శకానికి భవిష్యత్తు వేదిక.")], ["02", b("Plant Growth", "మొక్కల పెరుగుదల"), b("Resources can be added as crop-stage guidance develops.", "పంట దశల మార్గదర్శకం అభివృద్ధి చెందుతున్న కొద్దీ వనరులను జోడించవచ్చు.")], ["03", b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ"), b("A space for responsible crop-protection knowledge.", "బాధ్యతాయుత పంట రక్షణ జ్ఞానానికి ఒక వేదిక.")], ["04", b("Integrated Pest Management", "సమగ్ర కీటక నిర్వహణ"), b("Future articles can be structured here.", "భవిష్యత్ వ్యాసాలను ఇక్కడ క్రమబద్ధీకరించవచ్చు.")]];
 
-const nav = [["home", ui.navHome], ["expertise", b("Expertise", "నైపుణ్యం")], ["about", ui.navAbout], ["solutions", ui.navSolutions], ["products", ui.navProducts], ["approach", ui.navApproach], ["contact", ui.navContact]];
+const nav = [["home", ui.navHome], ["expertise", b("Expertise", "నైపుణ్యం")], ["about", ui.navAbout], ["solutions", ui.navSolutions], ["products", ui.navProducts], ["approach", ui.navApproach], ["articles", ui.navArticles], ["contact", ui.navContact]];
 const filters = [["all", b("All Products", "అన్ని ఉత్పత్తులు")], ["nutrition", b("Crop Nutrition", "పంట పోషణ")], ["growth", b("Plant Growth", "మొక్కల పెరుగుదల")], ["biological", b("Biological Crop Protection", "జీవ ఆధారిత పంట రక్షణ")], ["protection", b("Plant Protection", "మొక్కల రక్షణ")]];
 
 function logo(light = false) {
@@ -262,20 +262,79 @@ function expertiseSection() {
   </section>`;
 }
 
+function featuredArticlesSection() {
+  const isEn = locale === "en";
+  return `<section class="section articles-section" id="articles">
+    <div class="container">
+      ${heading(
+        b("RESEARCH & ARTICLES", "పరిశోధన & వ్యాసాలు"),
+        b("Agricultural Science & Crop Management Articles", "వ్యవసాయ పరిశోధన మరియు పంట యాజమాన్య వ్యాసాలు"),
+        b("Practical guidance and field-tested crop protection insights published by agriculture scientists and Stemgrow experts.", "వ్యవసాయ శాస్త్రవేత్తలు మరియు స్టెమ్‌గ్రో నిపుణుల సమగ్ర సస్యరక్షణ మార్గదర్శకాలు."),
+        true
+      )}
+      <div class="articles-featured-grid">
+        <article class="featured-article-card reveal">
+          <div class="featured-article-card__media">
+            <a href="/articles/chilli-black-thrips-management/">
+              <img src="/articles/chilli-black-thrips-management/page-1.jpeg" alt="${isEn ? "Chilli black thrips management article preview" : "మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం వ్యాసం"}" loading="lazy" />
+            </a>
+            <span class="featured-article-card__badge">వ్యవసాయం · Sep 2025</span>
+          </div>
+          <div class="featured-article-card__body">
+            <div class="featured-article-card__tags">
+              <span>పంట రక్షణ</span>
+              <span>Chilli IPM</span>
+              <span>Bio-Control</span>
+            </div>
+            <h3><a href="/articles/chilli-black-thrips-management/">మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం</a></h3>
+            <p class="featured-article-card__eng">Integrated Management of Black Thrips in Chilli</p>
+            <div class="featured-article-card__author">
+              <div class="featured-article-card__avatar">DV</div>
+              <div>
+                <strong>D. Venkatesh</strong>
+                <small>M.Sc. Horticulture (Vegetable Science) · SKLTSHU</small>
+              </div>
+            </div>
+            <p class="featured-article-card__summary">
+              ${isEn
+                ? "A comprehensive 3-page guide on identifying black thrips symptoms, damage on flowers and leaves, monitoring methods, cultural practices, and biological & chemical IPM solutions."
+                : "మిరప పంటలో నల్ల తామర పురుగుల గుర్తింపు, ఆకులు మరియు పూతపై వాటి ప్రభావం, పర్యవేక్షణ విధానం మరియు జీవ, రసాయన సమగ్ర నివారణ చర్యల పూర్తి వివరాలు."}
+            </p>
+            <div class="featured-article-card__actions">
+              <a href="/articles/chilli-black-thrips-management/" class="button button--gold">
+                ${isEn ? "Read Full Article" : "పూర్తి వ్యాసం చదవండి"}${arrow()}
+              </a>
+              <a href="/articles/" class="button button--ghost-dark">
+                ${isEn ? "View All Articles" : "అన్ని వ్యాసాలు చూడండి"}${arrow()}
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="articles-section__footer reveal">
+        <a href="/articles/" class="button button--green">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="margin-right:6px"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          ${isEn ? "Explore Articles Directory" : "అన్ని ప్రచురిత వ్యాసాలు చూడండి"}${arrow()}
+        </a>
+      </div>
+    </div>
+  </section>`;
+}
+
 function render() {
   document.documentElement.lang = locale === "en" ? "en" : "te";
   const shownProducts = filter === "all" ? products : products.filter((product) => product.category === filter);
   root.className = `app ${locale === "te" ? "app--telugu" : ""}`;
   root.innerHTML = replaceDecorativeSymbols(`
     <header class="site-header" id="site-header"><div class="container header-inner">
-      ${logo()}<nav class="desktop-nav" aria-label="Primary navigation">${nav.map(([id, label]) => `<button type="button" data-scroll="${id}">${pick(label)}</button>`).join("")}<button type="button" class="mobile-nav-cta" data-scroll="contact">${pick(ui.talk)}${arrow()}</button></nav>
-      <div class="header-actions">${languageSwitcher(true)}<button type="button" class="button button--gold header-contact" data-scroll="contact">${pick(ui.contact)}${arrow()}</button><button class="menu-toggle" type="button" data-menu aria-label="${pick(ui.menu)}" aria-expanded="false"><span></span><span></span><span></span></button></div>
+      ${logo()}<nav class="desktop-nav" aria-label="Primary navigation">${nav.map(([id, label]) => id === "articles" ? `<a href="/articles/" class="desktop-nav__link">${pick(label)}</a>` : `<button type="button" data-scroll="${id}">${pick(label)}</button>`).join("")}<button type="button" class="mobile-nav-cta" data-scroll="contact">${pick(ui.talk)}${arrow()}</button></nav>
+      <div class="header-actions">${languageSwitcher(true)}<a href="/articles/" class="button button--articles-header"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg><span>${locale === "en" ? "Articles" : "వ్యాసాలు"}</span></a><button type="button" class="button button--gold header-contact" data-scroll="contact">${pick(ui.contact)}${arrow()}</button><button class="menu-toggle" type="button" data-menu aria-label="${pick(ui.menu)}" aria-expanded="false"><span></span><span></span><span></span></button></div>
     </div></header>
 
     <main>
       <section class="hero" id="home"><div class="hero__media" role="img" aria-label="${pick(ui.heroScene)}"><span class="hero__slide hero__slide--cotton is-active" aria-hidden="true"></span><span class="hero__slide hero__slide--maize" aria-hidden="true"></span><span class="hero__slide hero__slide--mirchi" aria-hidden="true"></span></div><div class="hero__overlay"></div>${heroTicker()}
         <div class="container hero__content"><p class="eyebrow eyebrow--light">${pick(ui.heroLabel)}</p><h1 aria-label="${pick(ui.heroLead)} ${pick(ui.heroTail)}"><span class="hero__line"><span>${pick(ui.heroLead)}</span></span><span class="hero__line hero__gold"><span>${pick(ui.heroTail)}</span></span></h1><p class="hero__copy">${pick(ui.heroCopy)}</p>
-          <div class="hero__actions"><button class="button button--gold" type="button" data-scroll="products">${pick(ui.explore)}${arrow()}</button><button class="button button--ghost" type="button" data-scroll="contact">${pick(ui.talk)}</button></div>
+          <div class="hero__actions"><button class="button button--gold" type="button" data-scroll="products">${pick(ui.explore)}${arrow()}</button><button class="button button--ghost" type="button" data-scroll="contact">${pick(ui.talk)}</button><a href="/articles/" class="button button--hero-articles"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg><span>${locale === "en" ? "Research Articles" : "పరిశోధన వ్యాసాలు"}</span>${arrow()}</a></div>
           <div style="display:flex;gap:18px;flex-wrap:wrap"><button class="text-link text-link--light" type="button" data-scroll="expertise">${pick(ui.viewExpertise)}${arrow()}</button><button class="text-link text-link--light" type="button" data-scroll="solutions">${pick(ui.viewSolutions)}${arrow()}</button></div>
         </div><div class="hero__leaf" aria-hidden="true"></div>
       </section>
@@ -293,6 +352,8 @@ function render() {
       <section class="section product-section" id="products"><div class="container">${heading(ui.catalogEyebrow, ui.catalogTitle, ui.catalogCopy, true)}<div class="product-filters" role="tablist" aria-label="${locale === "en" ? "Product categories" : "ఉత్పత్తి వర్గాలు"}">${filters.map(([id, label]) => `<button type="button" data-filter="${id}" class="${filter === id ? "is-active" : ""}" role="tab" aria-selected="${filter === id}">${pick(label)}</button>`).join("")}</div>
         <div class="product-grid" aria-live="polite">${shownProducts.map(productCard).join("")}</div>${shownProducts.length ? "" : `<p class="empty-state">${pick(ui.noProducts)}</p>`}<p class="product-section__note">${pick(ui.policy)}</p></div></section>
 
+      ${featuredArticlesSection()}
+
       <section class="section crop-needs"><div class="container crop-needs-grid"><div class="crop-needs-copy reveal">${heading(ui.farmerEyebrow, ui.farmerTitle, ui.farmerCopy)}<div class="crop-needs-image" role="img" aria-label="${pick(ui.cropFieldScene)}"></div></div><div class="need-grid">${needs.map(([number, icon, title, copy]) => `<article class="need-card reveal"><span class="need-card__number">${number}</span><span class="need-card__icon">${icon}</span><div><h3>${pick(title)}</h3><p>${pick(copy)}</p></div><i></i></article>`).join("")}</div></div></section>
 
       <section class="section why-section"><div class="container">${heading(ui.whyEyebrow, ui.whyTitle, ui.whyCopy)}<div class="why-grid">${why.map(([number, title, copy]) => `<article class="why-card reveal"><span>${number}</span><h3>${pick(title)}</h3><p>${pick(copy)}</p></article>`).join("")}</div></div></section>
@@ -307,7 +368,7 @@ function render() {
       </div><div class="map-card reveal"><div class="map-card__head"><div><p class="eyebrow">${pick(ui.mapTitle)}</p><h3>Hyderabad, Telangana</h3></div><div class="map-card__actions"><a href="https://www.google.com/maps/search/?api=1&amp;query=H.+No.+2-84%2F3%2F237%2FEP%2C+Chengicherla%2C+Peerzadiguda%2C+Hyderabad%2C+Telangana+500039" target="_blank" rel="noreferrer">${pick(ui.viewMap)}</a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=H.+No.+2-84%2F3%2F237%2FEP%2C+Chengicherla%2C+Peerzadiguda%2C+Hyderabad%2C+Telangana+500039" target="_blank" rel="noreferrer">${pick(ui.directions)}${arrow()}</a></div></div><iframe title="${pick(ui.mapTitle)}" loading="lazy" src="https://www.google.com/maps?q=H.%20No.%202-84%2F3%2F237%2FEP%2C%20Chengicherla%2C%20Peerzadiguda%2C%20Hyderabad%2C%20Telangana%20500039&amp;output=embed"></iframe></div></div></section>
     </main>
 
-    <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand">${logo(true)}<p>${pick(ui.footerCopy)}</p>${languageSwitcher()}</div><div><h3>${pick(ui.footerNav)}</h3><ul>${nav.map(([id, label]) => `<li><button type="button" data-scroll="${id}">${pick(label)}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerProducts)}</h3><ul>${products.map((product) => `<li><button type="button" data-product="${product.id}">${product.name}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerContact)}</h3><address>${locale === "en" ? "H. No. 2-84/3/237/EP, Ground Floor, Chengicherla, Peerzadiguda, Hyderabad, Telangana, India, 500039" : "హెచ్. నెం. 2-84/3/237/EP, గ్రౌండ్ ఫ్లోర్, చెంగిచెర్ల, పీర్జాదిగూడ, హైదరాబాద్, తెలంగాణ, భారతదేశం, 500039"}</address><a href="tel:+919133243325">9133243325</a><a href="mailto:stemgrowagrisolutions@gmail.com">stemgrowagrisolutions@gmail.com</a></div></div><div class="container footer-bottom"><span>${pick(ui.copyright)}</span><span>${pick(ui.policy)}</span></div></footer>
+    <footer class="site-footer"><div class="container footer-grid"><div class="footer-brand">${logo(true)}<p>${pick(ui.footerCopy)}</p>${languageSwitcher()}</div><div><h3>${pick(ui.footerNav)}</h3><ul>${nav.map(([id, label]) => id === "articles" ? `<li><a href="/articles/">${pick(label)}</a></li>` : `<li><button type="button" data-scroll="${id}">${pick(label)}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerProducts)}</h3><ul>${products.map((product) => `<li><button type="button" data-product="${product.id}">${product.name}</button></li>`).join("")}</ul></div><div><h3>${pick(ui.footerContact)}</h3><address>${locale === "en" ? "H. No. 2-84/3/237/EP, Ground Floor, Chengicherla, Peerzadiguda, Hyderabad, Telangana, India, 500039" : "హెచ్. నెం. 2-84/3/237/EP, గ్రౌండ్ ఫ్లోర్, చెంగిచెర్ల, పీర్జాదిగూడ, హైదరాబాద్, తెలంగాణ, భారతదేశం, 500039"}</address><a href="tel:+919133243325">9133243325</a><a href="mailto:stemgrowagrisolutions@gmail.com">stemgrowagrisolutions@gmail.com</a></div></div><div class="container footer-bottom"><span>${pick(ui.copyright)}</span><span>${pick(ui.policy)}</span></div></footer>
     <a class="whatsapp-float" href="https://wa.me/919133243325" target="_blank" rel="noreferrer" aria-label="${locale === "en" ? "Chat with Stemgrow on WhatsApp" : "వాట్సాప్‌లో స్టెమ్‌గ్రోతో మాట్లాడండి"}">${whatsappIcon()}<span>WhatsApp</span></a>
     ${productModal()}`);
   document.body.style.overflow = selectedProduct ? "hidden" : "";

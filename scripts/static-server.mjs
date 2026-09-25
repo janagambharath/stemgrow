@@ -4,7 +4,17 @@ import { extname, join, normalize, resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "..");
 const publicRoot = resolve(root, "public");
-const types = { ".css": "text/css", ".js": "text/javascript", ".svg": "image/svg+xml", ".jpeg": "image/jpeg", ".jpg": "image/jpeg", ".png": "image/png", ".html": "text/html", ".xml": "application/xml", ".txt": "text/plain" };
+const types = {
+  ".css": "text/css; charset=utf-8",
+  ".js": "text/javascript; charset=utf-8",
+  ".svg": "image/svg+xml",
+  ".jpeg": "image/jpeg",
+  ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".html": "text/html; charset=utf-8",
+  ".xml": "application/xml; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8"
+};
 
 function safeFile(pathname) {
   const cleaned = normalize(decodeURIComponent(pathname)).replace(/^([/\\])+/, "");
@@ -29,11 +39,21 @@ createServer((request, response) => {
   const pathname = new URL(request.url ?? "/", "http://localhost").pathname;
   const file = pathname === "/" ? join(root, "index.html") : safeFile(pathname);
   if (!file || !existsSync(file)) {
-    response.writeHead(404, { "Content-Type": "text/html" });
+    response.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
     createReadStream(existsSync(join(root, "404.html")) ? join(root, "404.html") : join(publicRoot, "404.html")).pipe(response);
     return;
   }
-  response.writeHead(200, { "Content-Type": `${types[extname(file)] ?? "application/octet-stream"}; charset=utf-8`, "Cache-Control": "no-cache" });
+  const stat = statSync(file);
+  const contentType = types[extname(file).toLowerCase()] ?? "application/octet-stream";
+  response.writeHead(200, {
+    "Content-Type": contentType,
+    "Content-Length": stat.size,
+    "Cache-Control": "no-cache"
+  });
+  if (request.method === "HEAD") {
+    response.end();
+    return;
+  }
   createReadStream(file).pipe(response);
 }).listen(5173, "0.0.0.0", () => console.log("Stemgrow site: http://localhost:5173"));
 

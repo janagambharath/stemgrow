@@ -59,13 +59,19 @@
           <a href="/#products">Products</a>
           <a href="/#contact">Contact</a>
         </nav>
-        <a class="button button--gold header-contact" href="/#contact">
-          Contact Us
-          <svg class="arrow" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
-        </a>
-        <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+        <div class="header-actions">
+          <a class="button button--ghost-header" href="/articles/">
+            <svg class="arrow arrow--left" viewBox="0 0 18 18" aria-hidden="true" width="14" height="14"><path d="M15 9H4M8 14l-5-5 5-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+            All Articles
+          </a>
+          <a class="button button--gold header-contact" href="/#contact">
+            Contact Us
+            <svg class="arrow" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 9h11M10 4l5 5-5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"/></svg>
+          </a>
+          <button class="menu-toggle" type="button" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -122,25 +128,37 @@
         <div class="container">
           <div class="article-pages__grid">
 
-            <figure class="article-page" id="page-1">
-              <div class="article-page__frame">
+            <figure class="article-page" id="page-1" data-page-index="0">
+              <div class="article-page__frame" role="button" tabindex="0" aria-label="Open Page 1 in Fullscreen">
                 <img src="page-1.jpeg" alt="మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం - Page 1: Introduction and overview of black thrips infestation in chilli crops" loading="eager" />
+                <button type="button" class="article-page__fs-trigger" aria-label="View Page 1 in Full Screen">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                  <span>Full Screen · పూర్తి స్క్రీన్</span>
+                </button>
                 <span class="article-page__number">Page 1 of 3</span>
               </div>
               <figcaption>పేజీ 1 — పరిచయం, నల్ల తామర పురుగుల గుర్తింపు మరియు నష్టం</figcaption>
             </figure>
 
-            <figure class="article-page" id="page-2">
-              <div class="article-page__frame">
+            <figure class="article-page" id="page-2" data-page-index="1">
+              <div class="article-page__frame" role="button" tabindex="0" aria-label="Open Page 2 in Fullscreen">
                 <img src="page-2.jpeg" alt="మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం - Page 2: Symptoms, damage patterns and monitoring methods" loading="lazy" />
+                <button type="button" class="article-page__fs-trigger" aria-label="View Page 2 in Full Screen">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                  <span>Full Screen · పూర్తి స్క్రీన్</span>
+                </button>
                 <span class="article-page__number">Page 2 of 3</span>
               </div>
               <figcaption>పేజీ 2 — లక్షణాలు, పర్యవేక్షణ మరియు సమగ్ర యాజమాన్య పద్ధతులు</figcaption>
             </figure>
 
-            <figure class="article-page" id="page-3">
-              <div class="article-page__frame">
+            <figure class="article-page" id="page-3" data-page-index="2">
+              <div class="article-page__frame" role="button" tabindex="0" aria-label="Open Page 3 in Fullscreen">
                 <img src="page-3.jpeg" alt="మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం - Page 3: Chemical control measures and recommended pesticides" loading="lazy" />
+                <button type="button" class="article-page__fs-trigger" aria-label="View Page 3 in Full Screen">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                  <span>Full Screen · పూర్తి స్క్రీన్</span>
+                </button>
                 <span class="article-page__number">Page 3 of 3</span>
               </div>
               <figcaption>పేజీ 3 — రసాయన నియంత్రణ పద్ధతులు మరియు సిఫార్సు మందులు</figcaption>
@@ -253,25 +271,256 @@
         pages.forEach(page => observer.observe(page));
       }
 
-      // Image zoom on click
-      document.querySelectorAll('.article-page__frame img').forEach(img => {
-        img.addEventListener('click', () => {
-          const overlay = document.createElement('div');
-          overlay.className = 'image-lightbox';
-          overlay.innerHTML = `<div class="image-lightbox__backdrop"></div><div class="image-lightbox__wrap"><img src="${img.src}" alt="${img.alt}"/><button class="image-lightbox__close" aria-label="Close">×</button></div>`;
-          document.body.appendChild(overlay);
-          document.body.style.overflow = 'hidden';
-          requestAnimationFrame(() => overlay.classList.add('is-visible'));
-          const close = () => {
-            overlay.classList.remove('is-visible');
-            setTimeout(() => { overlay.remove(); document.body.style.overflow = ''; }, 300);
-          };
-          overlay.querySelector('.image-lightbox__backdrop').addEventListener('click', close);
-          overlay.querySelector('.image-lightbox__close').addEventListener('click', close);
-          document.addEventListener('keydown', function handler(e) {
-            if (e.key === 'Escape') { close(); document.removeEventListener('keydown', handler); }
+      // Pages data
+      const articlePagesData = [
+        {
+          src: 'page-1.jpeg',
+          page: 1,
+          title: 'పేజీ 1 — పరిచయం, నల్ల తామర పురుగుల గుర్తింపు మరియు నష్టం',
+          alt: 'మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం - Page 1'
+        },
+        {
+          src: 'page-2.jpeg',
+          page: 2,
+          title: 'పేజీ 2 — లక్షణాలు, పర్యవేక్షణ మరియు సమగ్ర యాజమాన్య పద్ధతులు',
+          alt: 'మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం - Page 2'
+        },
+        {
+          src: 'page-3.jpeg',
+          page: 3,
+          title: 'పేజీ 3 — రసాయన నియంత్రణ పద్ధతులు మరియు సిఫార్సు మందులు',
+          alt: 'మిరపలో నల్ల తామర పురుగుల సమగ్ర యాజమాన్యం - Page 3'
+        }
+      ];
+
+      let currentLightboxIndex = 0;
+      let currentZoom = 1;
+      let activeOverlay = null;
+
+      function openFullscreenLightbox(initialIndex) {
+        currentLightboxIndex = initialIndex;
+        currentZoom = 1;
+
+        if (activeOverlay) {
+          activeOverlay.remove();
+        }
+
+        const overlay = document.createElement('div');
+        overlay.className = 'image-lightbox';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Full Screen Image Viewer');
+
+        overlay.innerHTML = `
+          <div class="lightbox-topbar">
+            <div class="lightbox-info">
+              <span class="lightbox-badge" id="lightbox-badge">Page ${initialIndex + 1} of 3</span>
+              <span class="lightbox-title" id="lightbox-title">${articlePagesData[initialIndex].title}</span>
+            </div>
+            <div class="lightbox-actions">
+              <button class="lightbox-btn lightbox-btn--gold" id="btn-fs-toggle" type="button" title="Toggle browser fullscreen">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                <span id="fs-btn-label">Full Screen</span>
+              </button>
+              <button class="lightbox-btn lightbox-btn--icon" id="btn-zoom-in" type="button" title="Zoom in (+)">+</button>
+              <button class="lightbox-btn lightbox-btn--icon" id="btn-zoom-out" type="button" title="Zoom out (-)">−</button>
+              <button class="lightbox-btn" id="btn-zoom-reset" type="button" title="Reset zoom (100%)">100%</button>
+              <a class="lightbox-btn" id="btn-download" href="${articlePagesData[initialIndex].src}" target="_blank" rel="noopener" title="Open original image in new tab">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                <span>Original</span>
+              </a>
+              <button class="lightbox-btn lightbox-btn--close lightbox-btn--icon" id="btn-close-lb" type="button" aria-label="Close fullscreen view">✕</button>
+            </div>
+          </div>
+          <div class="lightbox-stage" id="lightbox-stage">
+            <button class="lightbox-arrow lightbox-arrow--prev" id="btn-prev-page" aria-label="Previous Page" ${initialIndex === 0 ? 'disabled' : ''}>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="lightbox-img-wrap" id="lightbox-img-wrap">
+              <img class="lightbox-img" id="lightbox-img" src="${articlePagesData[initialIndex].src}" alt="${articlePagesData[initialIndex].alt}" />
+            </div>
+            <button class="lightbox-arrow lightbox-arrow--next" id="btn-next-page" aria-label="Next Page" ${initialIndex === articlePagesData.length - 1 ? 'disabled' : ''}>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="lightbox-bottombar">
+            ${articlePagesData.map((p, idx) => `
+              <button class="lightbox-dot ${idx === initialIndex ? 'is-active' : ''}" data-target-idx="${idx}" type="button">
+                Page ${p.page}
+              </button>
+            `).join('')}
+          </div>
+        `;
+
+        document.body.appendChild(overlay);
+        document.body.style.overflow = 'hidden';
+        activeOverlay = overlay;
+
+        requestAnimationFrame(() => overlay.classList.add('is-visible'));
+
+        const stage = overlay.querySelector('#lightbox-stage');
+        const imgWrap = overlay.querySelector('#lightbox-img-wrap');
+        const img = overlay.querySelector('#lightbox-img');
+        const badge = overlay.querySelector('#lightbox-badge');
+        const title = overlay.querySelector('#lightbox-title');
+        const prevBtn = overlay.querySelector('#btn-prev-page');
+        const nextBtn = overlay.querySelector('#btn-next-page');
+        const dlBtn = overlay.querySelector('#btn-download');
+        const zoomResetBtn = overlay.querySelector('#btn-zoom-reset');
+        const fsToggleBtn = overlay.querySelector('#btn-fs-toggle');
+        const fsBtnLabel = overlay.querySelector('#fs-btn-label');
+        const closeBtn = overlay.querySelector('#btn-close-lb');
+        const dots = overlay.querySelectorAll('.lightbox-dot');
+
+        function setPage(newIndex) {
+          if (newIndex < 0 || newIndex >= articlePagesData.length) return;
+          currentLightboxIndex = newIndex;
+          currentZoom = 1;
+          applyZoom();
+
+          const data = articlePagesData[newIndex];
+          img.src = data.src;
+          img.alt = data.alt;
+          dlBtn.href = data.src;
+          badge.textContent = `Page ${data.page} of 3`;
+          title.textContent = data.title;
+
+          prevBtn.disabled = newIndex === 0;
+          nextBtn.disabled = newIndex === articlePagesData.length - 1;
+
+          dots.forEach((dot, idx) => {
+            dot.classList.toggle('is-active', idx === newIndex);
+          });
+        }
+
+        function applyZoom() {
+          imgWrap.style.transform = `scale(${currentZoom})`;
+          zoomResetBtn.textContent = `${Math.round(currentZoom * 100)}%`;
+        }
+
+        function zoomIn() {
+          if (currentZoom < 3.5) {
+            currentZoom = Math.min(3.5, currentZoom + 0.25);
+            applyZoom();
+          }
+        }
+
+        function zoomOut() {
+          if (currentZoom > 0.6) {
+            currentZoom = Math.max(0.6, currentZoom - 0.25);
+            applyZoom();
+          }
+        }
+
+        function resetZoom() {
+          currentZoom = 1;
+          applyZoom();
+        }
+
+        function toggleNativeFS() {
+          if (!document.fullscreenElement) {
+            if (overlay.requestFullscreen) {
+              overlay.requestFullscreen();
+            } else if (overlay.webkitRequestFullscreen) {
+              overlay.webkitRequestFullscreen();
+            }
+            fsBtnLabel.textContent = 'Exit Full Screen';
+          } else {
+            if (document.exitFullscreen) {
+              document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+              document.webkitExitFullscreen();
+            }
+            fsBtnLabel.textContent = 'Full Screen';
+          }
+        }
+
+        function closeLightbox() {
+          if (document.fullscreenElement) {
+            document.exitFullscreen().catch(() => {});
+          }
+          overlay.classList.remove('is-visible');
+          setTimeout(() => {
+            overlay.remove();
+            activeOverlay = null;
+            document.body.style.overflow = '';
+          }, 250);
+          document.removeEventListener('keydown', keyHandler);
+        }
+
+        function keyHandler(e) {
+          if (e.key === 'Escape') closeLightbox();
+          else if (e.key === 'ArrowLeft') setPage(currentLightboxIndex - 1);
+          else if (e.key === 'ArrowRight') setPage(currentLightboxIndex + 1);
+          else if (e.key === '+' || e.key === '=') zoomIn();
+          else if (e.key === '-') zoomOut();
+          else if (e.key === 'f' || e.key === 'F') toggleNativeFS();
+        }
+
+        document.addEventListener('keydown', keyHandler);
+
+        // Click outside on stage background to close
+        stage.addEventListener('click', (e) => {
+          if (e.target === stage || e.target === imgWrap) {
+            closeLightbox();
+          }
+        });
+
+        closeBtn.addEventListener('click', closeLightbox);
+        fsToggleBtn.addEventListener('click', toggleNativeFS);
+        overlay.querySelector('#btn-zoom-in').addEventListener('click', zoomIn);
+        overlay.querySelector('#btn-zoom-out').addEventListener('click', zoomOut);
+        zoomResetBtn.addEventListener('click', resetZoom);
+
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setPage(currentLightboxIndex - 1);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setPage(currentLightboxIndex + 1);
+        });
+
+        dots.forEach(dot => {
+          dot.addEventListener('click', (e) => {
+            e.stopPropagation();
+            setPage(Number(dot.dataset.targetIdx));
           });
         });
+
+        // Mouse wheel zoom
+        stage.addEventListener('wheel', (e) => {
+          e.preventDefault();
+          if (e.deltaY < 0) zoomIn();
+          else zoomOut();
+        }, { passive: false });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        stage.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        stage.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          const diff = touchEndX - touchStartX;
+          if (diff > 60) setPage(currentLightboxIndex - 1);
+          else if (diff < -60) setPage(currentLightboxIndex + 1);
+        }, { passive: true });
+      }
+
+      // Bind all article page frames & trigger buttons to launch full screen viewer
+      document.querySelectorAll('.article-page').forEach((pageEl, index) => {
+        const frame = pageEl.querySelector('.article-page__frame');
+        if (frame) {
+          frame.addEventListener('click', () => openFullscreenLightbox(index));
+          frame.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openFullscreenLightbox(index);
+            }
+          });
+        }
       });
     </script>
   </body>
