@@ -1,4 +1,4 @@
-import { createReadStream, existsSync } from "node:fs";
+import { createReadStream, existsSync, statSync } from "node:fs";
 import { createServer } from "node:http";
 import { extname, join, normalize, resolve } from "node:path";
 
@@ -10,12 +10,17 @@ function safeFile(pathname) {
   const cleaned = normalize(decodeURIComponent(pathname)).replace(/^([/\\])+/, "");
   // Keep product files at the site root for Render Static Sites, while also
   // accepting the legacy public/ location during local development.
-  const bases = pathname.startsWith("/products/") || pathname.startsWith("/crops/") || ["/favicon.svg", "/og-stemgrow.svg", "/robots.txt", "/sitemap.xml"].includes(pathname)
+  const bases = pathname.startsWith("/products/") || pathname.startsWith("/crops/") || pathname.startsWith("/articles/") || ["/favicon.svg", "/og-stemgrow.svg", "/robots.txt", "/sitemap.xml"].includes(pathname)
     ? [root, publicRoot]
     : [root];
   for (const base of bases) {
-    const file = resolve(base, cleaned);
-    if (file.startsWith(base) && existsSync(file)) return file;
+    let file = resolve(base, cleaned);
+    if (!file.startsWith(base)) continue;
+    // If the resolved path is a directory, look for index.html inside it
+    if (existsSync(file) && statSync(file).isDirectory()) {
+      file = join(file, "index.html");
+    }
+    if (existsSync(file) && !statSync(file).isDirectory()) return file;
   }
   return null;
 }
@@ -31,3 +36,4 @@ createServer((request, response) => {
   response.writeHead(200, { "Content-Type": `${types[extname(file)] ?? "application/octet-stream"}; charset=utf-8`, "Cache-Control": "no-cache" });
   createReadStream(file).pipe(response);
 }).listen(5173, "0.0.0.0", () => console.log("Stemgrow site: http://localhost:5173"));
+
