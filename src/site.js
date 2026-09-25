@@ -1,6 +1,12 @@
 const root = document.querySelector("#root");
 const b = (en, te) => ({ en, te });
-let locale = "en";
+let locale = (() => {
+  try {
+    return localStorage.getItem("stemgrow_lang") || "te";
+  } catch {
+    return "te";
+  }
+})();
 let filter = "all";
 let selectedProduct = null;
 let prefillProduct = "";
@@ -437,7 +443,12 @@ root.addEventListener("click", (event) => {
   if (!target) return;
   if (target.dataset.modalBackdrop !== undefined && event.target === target) { selectedProduct = null; refresh(); return; }
   if (target.dataset.closeModal !== undefined) { selectedProduct = null; refresh(); return; }
-  if (target.dataset.lang) { locale = target.dataset.lang; refresh(); return; }
+  if (target.dataset.lang) {
+    locale = target.dataset.lang;
+    try { localStorage.setItem("stemgrow_lang", locale); } catch {}
+    refresh();
+    return;
+  }
   if (target.dataset.filter) { filter = target.dataset.filter; refresh(); if (target.dataset.scroll) document.querySelector("#products")?.scrollIntoView({ behavior: "smooth", block: "start" }); return; }
   if (target.dataset.enquireProduct) {
     const product = products.find((entry) => entry.id === target.dataset.enquireProduct);
