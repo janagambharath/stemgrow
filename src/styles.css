@@ -25,8 +25,8 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 82px; }
-body { margin: 0; min-width: 320px; background: var(--cream); }
+html { scroll-behavior: smooth; scroll-padding-top: 82px; overflow-x: hidden; }
+body { margin: 0; min-width: 320px; background: var(--cream); overflow-x: hidden; width: 100%; }
 button, input, textarea { font: inherit; }
 button { color: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
@@ -48,9 +48,9 @@ img { display: block; max-width: 100%; }
 .section-heading--center > p:last-child { margin-inline: auto; }
 
 /* Header */
-.site-header { position: fixed; top: 0; z-index: 50; width: 100%; color: var(--white); transition: background .28s ease, box-shadow .28s ease, color .28s ease; }
+.site-header { position: fixed; top: 0; z-index: 50; width: 100%; max-width: 100%; box-sizing: border-box; color: var(--white); transition: background .28s ease, box-shadow .28s ease, color .28s ease; }
 .site-header--solid { background: rgba(255, 254, 250, 0.96); color: var(--green-900); box-shadow: 0 5px 20px rgba(6, 42, 32, 0.09); backdrop-filter: blur(14px); }
-.header-inner { height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 26px; }
+.header-inner { height: 84px; display: flex; align-items: center; justify-content: space-between; gap: 26px; width: 100%; box-sizing: border-box; }
 .logo { display: inline-flex; align-items: center; gap: 9px; color: var(--green-900); text-decoration: none; line-height: 1; }
 .logo--light { color: var(--white); }
 .site-header:not(.site-header--solid) .logo { color: var(--white); }
@@ -434,13 +434,15 @@ img { display: block; max-width: 100%; }
 
 @media (max-width: 840px) {
   .section { padding: 58px 0; }
-  .container { width: min(100% - 36px, 1180px); }
-  .header-inner { height: 72px; }
-  .desktop-nav { position: absolute; top: 72px; left: 18px; right: 18px; display: grid; gap: 2px; overflow: hidden; max-height: 0; padding: 0 16px; border-radius: 0 0 13px 13px; color: var(--green-900); background: var(--white); box-shadow: 0 16px 30px rgba(3,45,28,.16); transition: max-height .25s ease, padding .25s ease; }
+  .container { width: min(100% - 32px, 1180px); }
+  .header-inner { height: 72px; gap: 12px; }
+  .button--articles-header { display: none; }
+  .desktop-nav { position: absolute; top: 72px; left: 16px; right: 16px; display: grid; gap: 2px; overflow: hidden; max-height: 0; padding: 0 16px; border-radius: 0 0 13px 13px; color: var(--green-900); background: var(--white); box-shadow: 0 16px 30px rgba(3,45,28,.16); transition: max-height .25s ease, padding .25s ease; }
   .desktop-nav button, .desktop-nav a { width: 100%; padding: 12px 8px; text-align: left; font-size: .79rem; color: inherit; }
   .desktop-nav button::after, .desktop-nav a::after { display: none; }
   .header-contact { display: none; }
-  .menu-toggle { display: block; }
+  .header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .menu-toggle { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; width: 40px; height: 40px; padding: 8px; margin: 0; }
   .hero { min-height: 640px; }
   .hero-ticker { top: 72px; padding: 7px 0; }
   .hero__content { padding-top: 148px; padding-bottom: 68px; }
@@ -457,14 +459,15 @@ img { display: block; max-width: 100%; }
 }
 
 @media (max-width: 560px) {
-  .container { width: min(100% - 28px, 1180px); }
+  .container { width: min(100% - 24px, 1180px); }
   .section { padding: 48px 0; }
-  .logo__mark { width: 37px; height: 37px; }
-  .logo strong { font-size: .79rem; }
-  .logo small { font-size: .42rem; }
-  .language-switcher--compact button { padding: 6px 7px; font-size: .59rem; }
-  .header-actions { gap: 3px; }
-  .menu-toggle { width: 36px; }
+  .header-inner { gap: 8px; }
+  .logo__mark { width: 35px; height: 35px; }
+  .logo strong { font-size: .76rem; }
+  .logo small { font-size: .4rem; }
+  .language-switcher--compact button { padding: 5px 8px; font-size: .59rem; }
+  .header-actions { gap: 6px; flex-shrink: 0; }
+  .menu-toggle { width: 38px; height: 38px; padding: 6px; }
   .hero__leaf { top: 4%; width: 68vw; }
   .section-heading { margin-bottom: 32px; }
   .section-heading h2, .cta-content h2 { font-size: 2rem; }
